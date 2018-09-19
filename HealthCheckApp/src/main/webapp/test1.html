@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="icon" type="image/png" href="images/logo.png" sizes="32x32">
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,500,500italic,400italic,700italic,900,900italic,300italic,300,100italic,100' rel='stylesheet' type='text/css'>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-select.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link href="css/layout.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    
+    
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css"
+href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
+
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script
+ src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+ <link href="css/layout.css" rel="stylesheet">
+    <link href="css/empreg.css" rel="stylesheet"> 
+    <script src="src/jquery-customselect.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-select.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    
+	<link href="https://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
+  	    rel="stylesheet" type="text/css" />
+	<script src="https://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"
+    	type="text/javascript"></script>
+
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	 	<div id="page-wrapper">
+     <h1>HTML Datalist with AJAX</h1>
+
+    <label for="ajax">Pick an HTML Element (options loaded using AJAX)</label>
+    <input type="text" id="ajax" list="json-datalist" placeholder="e.g. datalist" multiple="multiple">
+    <datalist id="json-datalist" onchange="callFunctio"></datalist>
+</div>
+	<br><br><br>
+	<input type="text" id="addMedmantraPackagesDropDownInput" list="addMedmantraPackagesList"  placeholder="Medmantra Packages" multiple/>
+						<datalist id="addMedmantraPackagesList">
+						<option value="black"></datalist>
+		
+		<br><br><br>
+		<input type="email" list="emails" multiple>
+<datalist id="emails">
+	<option value="first">
+	<option value="second">
+	<option value="third@example.com">
+	<option value="last@example.com">
+</datalist>				
+	
+</body>
+
+
+<script>		
+	$(document).ready(function() {
+		
+		var URL = "http://localhost:8080/HealthCheckApp/apollo/package/list";
+		
+		// Get the <datalist> and <input> elements.
+		var dataList = document.getElementById('json-datalist');
+		var input = document.getElementById('ajax');
+		var inputValue = document.getElementById('ajax').value;
+
+/* 		$("#ajax").keyup(function() {
+	    	if (inputValue.length > 0) { */
+				// Create a new XMLHttpRequest.
+				var request = new XMLHttpRequest();
+		
+				// Handle state changes for the request.
+				request.onreadystatechange = function (response) {
+				    if (request.readyState === 4) {
+				        if (request.status === 200) {
+				            var jsonOptions = JSON.parse(request.responseText);
+							alert(jsonOptions)
+				            jsonOptions.forEach(function (item) {
+				                var option = document.createElement('option');
+				                option.value = item.packageId;
+				                dataList.appendChild(option);
+				            });
+				            input.placeholder = "e.g. datalist";
+				        } else {
+				            input.placeholder = "Couldn't load datalist options :(";
+				        }
+				    }
+				};
+				input.placeholder = "Loading options...";
+				request.open('GET', 'http://localhost:8080/HealthCheckApp/apollo/package/list', true);
+				request.send();
+	 /*    	}
+		}); */
+				            
+		var dataList1 = document.getElementById("addMedmantraPackagesList");
+		var input1 = document.getElementById("addMedmantraPackagesDropDownInput");
+		$("#addMedmantraPackagesDropDownInput").keyup(function() {
+			var name = document.getElementById("addMedmantraPackagesDropDownInput").value;
+	    	if (name.length > 0) {
+			    $.ajax({
+	                //url : URL + "/HealthCheckApp/apollo/mapping/serviceList",
+	                url : URL,
+				    type : "GET",
+				    dataType: "json",
+				    async:"false",
+				    error : function() {
+				    	input1.placeholder = "Couldn't load datalist options :(";
+				     alert('error');
+				    },
+				    success : function(data) {
+							for(var i=0;i< 3; i++) {
+								id = data[i].packageId;
+								name = data[i].packageName;
+								var option = document.createElement('option');
+					            option.value = id;
+					            dataList1.appendChild(option);
+								
+							}
+		            }
+	  		 });
+	    	}
+		});
+		
+	})
+</script>
+
+</html>

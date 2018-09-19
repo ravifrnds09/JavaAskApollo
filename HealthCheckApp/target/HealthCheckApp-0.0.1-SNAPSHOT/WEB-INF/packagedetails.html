@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package Details</title>
+
+<link rel="icon" type="image/png" href="images/logo.png" sizes="32x32">
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,500,500italic,400italic,700italic,900,900italic,300italic,300,100italic,100' rel='stylesheet' type='text/css'>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-select.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link href="css/layout.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    
+    
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css"
+href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
+
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+<script
+ src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+ <link href="css/layout.css" rel="stylesheet">
+    <link href="css/empreg.css" rel="stylesheet"> 
+    <script src="src/jquery-customselect.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-select.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+ 
+ <link href="https://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
+    rel="stylesheet" type="text/css" />
+<script src="https://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"
+    type="text/javascript"></script>
+ 
+ <style>
+
+
+	body {font-family: "Lato", sans-serif;}
+	
+	.tablink {
+	    background-color: #555;
+	    color: white;
+	    float: left;
+	    border: none;
+	    outline: none;
+	    cursor: pointer;
+	    padding: 14px 16px;
+	    font-size: 17px;
+	    width: 25%;
+	}
+	
+	.tablink:hover {
+	    background-color: #777;
+	}
+	
+	body {margin:0;}
+	
+	.navbar {
+	  overflow: hidden;
+	  background-color: #33;
+	  position: fixed;
+	  top: 0;
+	  width: 100%;
+	}
+	
+	.navbar a {
+	  float: left;
+	  display: block;
+	  color: #f2f2f2;
+	  text-align: center;
+	  padding: 14px 16px;
+	  text-decoration: none;
+	  font-size: 17px;
+	}
+	
+	.main {
+	  padding: 16px;
+	  margin-top: 30px;
+	  height: 1500px; /* Used in this example to enable scrolling */
+	}
+	
+	.header {
+	  position: fixed;
+	  top: 60px;
+	  left: 0;
+	  width: 100%;
+	  height: 48px;
+	  z-index: 10;
+	  background: black;
+	  -webkit-box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
+	  -moz-box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
+	  box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
+	}
+	
+	.titleheader {
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 60px;
+	  z-index: 10;
+	  background: white;
+	  -webkit-box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
+	  -moz-box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
+	  box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
+	}
+	
+	.titleheaderlogout {
+	  position: fixed;
+	  top: 0;
+	  left: 90%;
+	  width: 100%;
+	  height: 60px;
+	  z-index: 10;
+	  background: white;
+	  -webkit-box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
+	  -moz-box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
+	  box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
+	}
+	
+</style>
+ 
+ 
+<script type="text/javascript">
+var packageid;
+var packagename;
+var description;
+var recommenedfor;
+var agegroup;
+var frequency;
+
+
+$(document).ready(function() {
+
+	 //var URL = "http://localhost:8080";
+	
+	 //var URL = "https://devapp.askapollo.com";
+	
+	 //var URL = "https://apptest.askapollo.com";
+	 
+	 var URL = "http://10.40.32.51:8080";
+	 
+	window.addEventListener( "pageshow", function ( event ) {
+		  var historyTraversal = event.persisted || 
+		                         ( typeof window.performance != "undefined" && 
+		                              window.performance.navigation.type === 2 );
+		  if ( historyTraversal ) {
+		    window.location.reload();
+		  }
+	});
+	
+	
+//$('#show').click(function() {
+		
+	$('#testParameterDetailsId').click(function() {
+		window.top.location=URL + "/HealthCheckApp/paramDetails";
+	});
+	
+	$('#testDetailsId').click(function() {
+		window.top.location=URL + "/HealthCheckApp/testDetails";
+	});
+	
+	$('#packageMappingId').click(function() {
+		window.top.location=URL + "/HealthCheckApp/mappingDetails";
+	})
+	
+	
+	
+	$.ajax({
+        url: URL + "/HealthCheckApp/apollo/test/list",
+        type: "GET",
+	    dataType: "json",
+	    
+	    error : function() {
+	     //alert('error');
+	    },
+	    
+        success: function (data) {
+           	
+            var select = document.getElementById("testNameAdd");
+			
+	            for(var i=0;i< data.length; i++) {
+					id = data[i].testId;
+					name = data[i].testName;
+	                select.options[select.options.length]=new Option(name,name);     
+				}
+                
+                $('#testNameAdd').multiselect({
+                	includeSelectAllOption: true,
+                    numberDisplayed: 1,
+                    enableCaseInsensitiveFiltering:true,
+                    nonSelectedText :'Select Tests',
+                    maxHeight: 200,
+                    maxWidth: 60,
+                    buttonWidth: '14%'
+                });
+            },
+        	error:function() {
+             }
+    });
+	
+	              
+	$('#buttonAdd').click( function (e) {
+		var packageNameAdd = $("#packageNameAdd").val();
+		var descriptionAdd = $("#descriptionAdd").val();
+		var recommendedForAdd = $("#recommendedForAdd").val();
+		var ageGroupAdd = $("#ageGroupAdd").val();
+		var frequencyAdd = $("#frequencyAdd").val();
+		var recommenBodyPartAdd = $("#recommenBodyPartAdd").val();
+		var clinicalConditionAdd = $("#clinicalConditionAdd").val();
+		var genderAdd = $('input[name="gender"]:checked').val();
+		var selectTestString = "";
+		  if( $('#testNameAdd :selected').length> 0){
+			    $('#testNameAdd :selected').each(function(i, selected) {
+			    	if (selectTestString == "") {
+			    		selectTestString = $(selected).val();
+					} else {
+						selectTestString +=  "," + $(selected).val();
+					}
+				});
+			}
+		  	if ($.trim(packageNameAdd).length == 0 || packageNameAdd == "") {
+		        alert("Please Enter Package Name");
+		        return false;
+		    } else {
+		    	
+				  $.ajax({
+				      type: 'POST',
+				      url : URL +  "/HealthCheckApp/apollo/package/add",
+				      data : JSON.stringify({"packageName":packageNameAdd,"description":descriptionAdd,"recommendedFor":recommendedForAdd,"ageGroup":ageGroupAdd,"frequency":frequencyAdd,"testNamesString":selectTestString,"gender":genderAdd,"bodyPart":recommenBodyPartAdd,"clinicalCondi":clinicalConditionAdd}),
+				      dataType : 'json',
+				      contentType: "application/json; charset=utf-8",
+				      success : function(data) {
+				    	  window.top.location=URL + "/HealthCheckApp/packageDetails"
+				      },
+				      error:function(){
+				    	  window.top.location=URL + "/HealthCheckApp/packageDetails";
+				      }
+				});
+				   //ResetForm();
+		    }
+	});
+	
+	function ResetForm() {
+    	$('input[type="text"]').val('');
+    	$("#testNameAdd").multiselect("deselectAll", false);
+        $('#testNameAdd').multiselect('refresh');
+    	document.getElementById("descriptionAdd").value = "";
+    	document.getElementById("recommendedForAdd").value = "";
+	}
+	
+ 	$('#my-table-book').show();
+	$('#doctorlist').show();
+ 	
+	tables= $('#doctorlist').DataTable({
+	destroy: true,
+    searching: true,
+		 "ajax" : {
+	      "type" : "GET",
+		  "url" : URL + "/HealthCheckApp/apollo/package/list",
+		  "dataSrc" : function (json) {
+	            var return_data = new Array();
+	            for(var i=0;i< json.length; i++){
+	              return_data.push({
+	                'packageId': json[i].packageId,
+	                'packageName'  : json[i].packageName,
+	                'testNamesString' : json[i].testNamesString,
+	                'frequency' : json[i].frequency,
+	                'ageGroup' : json[i].ageGroup,
+	                'description' : json[i].description,
+	                'recommendedFor' : json[i].recommendedFor,
+	                'gender' : json[i].gender,
+	                'bodyPart' : json[i].bodyPart,
+	                'condition' : json[i].clinicalCondi,
+	              })
+	            }
+	            return return_data;
+	          }
+		   
+		 },
+		 "columns": [{ "data": "packageId", width:5},
+		             {"data":"packageName", width:150},
+		       		 {"data":"testNamesString", width:250},
+		       		 {"data": "frequency", width:90},
+		    		 {"defaultContent": "<button  class=\"select\" data-toggle=\"modal\" data-target=\"#mymodal2\" data-keyboard=\"false\" data-backdrop=\"static\">Delete</button>", width: 30},
+		    		 {"defaultContent": "<button  class=\"select\" data-toggle=\"modal\" data-target=\"#mymodal1\" data-keyboard=\"false\" data-backdrop=\"static\">Edit</button>", width: 30},
+  					 {"data": "ageGroup", width:70},
+		     		 {"data":"description", width:80},
+					 {"data": "recommendedFor", width:70},
+		     		 {"data":"gender", width:10},
+					 {"data": "bodyPart", width:30},
+		     		 {"data":"condition", width:30}
+		   ]
+        });
+var table = $('#doctorlist').DataTable();
+
+$('#doctorlist tbody').on( 'click', 'tr', function () {
+	if ($(this).index() == 4 ) { // provide index of your column in which you prevent row click here is column of 4 index
+        return;
+    }
+	$("#testName").empty();
+	var hiddendata=tables.row(this).data()[0];
+	
+	 var data=$(this).text();
+	 packageid = $('td', this).eq(0).text();
+	 packagename=$('td', this).eq(1).text();
+	 var testName=$('td', this).eq(2).text();
+	 frequency=$('td', this).eq(3).text();
+	 agegroup=$('td', this).eq(6).text();
+	 description=$('td', this).eq(7).text();
+	 recommenedfor=$('td', this).eq(8).text();
+	 genderClick=$('td', this).eq(9).text();
+	 bodyPart=$('td', this).eq(10).text();
+	 clinicalCondition=$('td', this).eq(11).text();
+ 	
+ 	$.ajax({
+        url: URL + "/HealthCheckApp/apollo/test/list",
+        type: "GET",
+	    dataType: "json",
+	    
+        success: function (data) {
+            var finalRes1=data.orderedParList;
+           	
+            var select = document.getElementById("testName");
+			
+            for(var i=0;i< data.length; i++) {
+				id = data[i].testId;
+				name = data[i].testName;
+                select.options[select.options.length]=new Option(name,name);     
+			}
+                
+                $('#testName').multiselect({
+                	includeSelectAllOption: true,
+                    numberDisplayed: 1,
+                    enableCaseInsensitiveFiltering:true,
+                    nonSelectedText :'Select Tests',
+                    maxHeight: 200,
+                    maxWidth: 150,
+                    width: 60,
+                    buttonWidth: '75%'
+                });
+                $("#testName").multiselect("deselectAll", false);
+                $('#testName').multiselect('refresh');
+                $('#testName').multiselect('select', testName.split(','));
+            },
+        	error:function() {
+             	//alert('error'); 
+             }
+    });
+ 	
+ 	//document.getElementById('packageID').value=packageid;
+ 	document.getElementById('packageName').value=packagename;
+ 	document.getElementById('description').value=description;
+ 	document.getElementById('recommendedFor').value=recommenedfor;
+ 	document.getElementById('ageGroup').value=agegroup;
+ 	document.getElementById('frequency').value=frequency;
+    if(genderClick === "male") {
+    	document.getElementById('genderChoice1').checked = true;
+    } else if (genderClick === "female") {
+    	document.getElementById('genderChoice2').checked = true;
+    } else if (genderClick === "both") {
+    	document.getElementById('genderChoice3').checked = true;
+    } 	
+    document.getElementById('bodyPart').value=bodyPart;
+    document.getElementById('clinicalCondi').value=clinicalCondition;
+
+});
+$('#update').click( function (e) {
+	
+	var packagename = $("#packageName").val();
+	var packageDescription = $("#description").val();
+	var packageRecommendedFor = $("#recommendedFor").val();
+	var packageAgeGroup = $("#ageGroup").val();
+	var packageFrequency = $("#frequency").val();  
+	var packageGender = $('input[name="gender"]:checked').val();
+	var recommenBodyPart = $("#bodyPart").val();
+	var clinicalCondition = $("#clinicalCondi").val();
+	var selectTestString = "";
+	  if( $('#testName :selected').length> 0){
+		    $('#testName :selected').each(function(i, selected) {
+		    	if (selectTestString == "") {
+		    		selectTestString = $(selected).val();
+				} else {
+					selectTestString +=  "," + $(selected).val();
+				}
+			});
+		}
+	  
+		  $.ajax({
+		      type: 'POST',
+		      url : URL +  "/HealthCheckApp/apollo/package/update",
+		      data : JSON.stringify({"packageId":packageid,"packageName":packagename,"description":packageDescription,"recommendedFor":packageRecommendedFor,"ageGroup":packageAgeGroup,"frequency":packageFrequency,"testNamesString":selectTestString,"gender":packageGender,"bodyPart":recommenBodyPart,"clinicalCondi":clinicalCondition}),
+		      dataType : 'json',
+		      contentType: "application/json; charset=utf-8",
+		      success : function(data) {
+		    	  window.top.location=URL + "/HealthCheckApp/packageDetails"
+		      },
+		      error:function(){
+		    	  window.top.location=URL + "/HealthCheckApp/packageDetails";
+		      }
+		});
+});
+
+
+
+/* Delete */
+
+		$('#delete').click( function (e) {
+		    $.ajax({
+		      type: 'POST',
+		      url : URL + "/HealthCheckApp/apollo/package/delete",
+		      data : JSON.stringify({"packageId":packageid}),
+		      dataType : 'json',
+		      contentType: "application/json; charset=utf-8",
+		      success : function(data) {
+			      	window.top.location=URL + "/HealthCheckApp/packageDetails";
+			  },
+			  error:function(){
+			   		window.top.location=URL + "/HealthCheckApp/packageDetails";
+			  }
+		    });
+		});
+		
+		$('#logoutButton').click( function (e) {
+		    $.ajax({
+		      type: 'POST',
+		      url : URL + "/HealthCheckApp/apollo/login/logout",
+		      data : JSON.stringify({"packageId":packageid}),
+		      dataType : 'json',
+		      contentType: "application/json; charset=utf-8",
+		      success : function(data) {
+			      	window.top.location=URL + "/HealthCheckApp/login.html";
+			  },
+			  error:function(){
+			   		window.top.location=URL + "/HealthCheckApp/packageDetails";
+			  }
+		    });
+		});
+		
+});
+
+</script>
+</head>
+<body>
+	
+	<!-- <div class="titleheader">
+		<h3 align="center">Medmantra Health Check Data Entry</h3>
+	</div> -->
+	
+	<div class="titleheader">
+	
+		<div style="float:left; width:90%;"><h3 align="center">Medmantra Health Check Data Entry</h3></div>
+		<div class="titleheaderlogout" style="float:right; width:10%;" ><h3 align="center" id="logoutButton">Logout</h3></div>
+	
+	</div>
+	
+	<br><br>
+	
+	<div class="header">
+    <!-- <div class="navbar"> -->
+	    <input class="tablink" type="button" id="testParameterDetailsId" value="Test Parameter">
+		<input class="tablink" type="button" id="testDetailsId" value="Test Details">
+		<input class="tablink" type="button" id="packageDetailsId" value="Package Details">
+		<input class="tablink" type="button" id="packageMappingId" value="Package Mapping">
+	</div>
+	
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	
+	<div>
+		&nbsp&nbsp
+		Package Name:&nbsp
+	    <input type="text" id="packageNameAdd" autocomplete="off" style="height: 30px">
+	   
+	    &nbsp&nbsp
+		Tests:&nbsp
+		<select  id="testNameAdd" name="area" style="width: 210px; height: 30px" multiple></select>
+		
+		&nbsp&nbsp  
+		Frequency:&nbsp
+		<input type="text" id="frequencyAdd" autocomplete="off" style="width: 170px; height: 30px">
+		
+		&nbsp&nbsp
+		Age Group:&nbsp
+		<input type="text" id="ageGroupAdd" style="height: 30px">
+		
+	   	&nbsp&nbsp  
+		Gender:&nbsp
+		<input type="radio" id="genderChoice1Add" name="gender" value="male">Male
+		&nbsp
+		<input type="radio" id="genderChoice2Add" name="gender" value="female">Female
+		&nbsp
+		<input type="radio" id="genderChoice3Add" name="gender" value="both">Both
+	</div>
+	
+	<br>
+	<br>
+	
+	<div>		
+		
+		&nbsp&nbsp
+		Body Part:&nbsp&nbsp
+		<input type="text" id="recommenBodyPartAdd" style="height: 30px">
+		
+		&nbsp&nbsp
+		Clinical Condition:&nbsp&nbsp
+		<input type="text" id="clinicalConditionAdd" style="height: 30px">
+		
+		&nbsp&nbsp
+		Description:&nbsp&nbsp
+		<textarea rows="3" cols="30" id="descriptionAdd"></textarea>
+		
+		&nbsp&nbsp
+		Recommended For:&nbsp&nbsp
+		<textarea rows="3" cols="28" id="recommendedForAdd"></textarea>
+		
+		&nbsp&nbsp
+		<input class="button" type="button" id="buttonAdd" value=" Add ">
+		
+	</div>
+	
+	<br>
+	<br>
+	
+	<div>
+		<div id="my-table-book" class="table-responsive">
+		<h3>&nbsp&nbspList Of Packages</h3>
+		<br>
+		<div id="my-table-book" class="table-responsive">
+			<table id="doctorlist" class="table table-striped" style="width: 100%"><!-- class="doctorlist"  -->
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>Name of Apollo Package</th>
+						<th>Test Names</th>
+						<th>Frequency</th>
+						<th></th>
+						<th></th>
+						<th>Age Group</th>
+						<th>Description</th>
+						<th>Recommended For</th>
+						<th>Gender</th>
+						<th>Body Part</th>
+						<th>Clinical Condition</th>	
+					</tr>
+				</thead>
+	
+				<!-- <tfoot>
+					<tr>
+						<th>id</th>
+						<th>Name of Apollo Package</th>
+						<th>Test Names</th>
+						<th>Gender</th>
+						<th>Condition</th>
+						<th>Body Part</th>
+						<th>Frequency</th>
+						<th></th>
+						<th></th>
+						<th>Age Group</th>
+						<th>Description</th>
+						<th>Recommended For</th>
+					</tr>
+				</tfoot> -->
+			</table>
+			<br>
+			<br>
+		</div>
+		</div>
+	</div>
+	<div class="modal fade" id="mymodal1" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+                
+                <!-- For form popup -->
+
+            <form class="form-horizontal color" method="post">
+              <div class="modal-header">
+                <button type="button" class="close" id="close" data-dismiss="modal">
+                  &times;
+                </button>
+                <h3 class="modal-title">Edit Package</h3>
+              </div>
+              <div class="modal-body">
+                <table class="table table-style">
+                  <tbody>
+                    <!-- <tr class="table-style">
+                      <td>Package ID:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                      <input type="text" id="packageID" name="packageID"></td>
+                      
+                    </tr> -->
+                    <tr class="table-style">
+                       <td>PackageName:</td>
+                       <td><input type="text" id="packageName" name="packageName" autocomplete="off" style="width: 360px"></td>
+                    </tr>
+                    
+                    
+                    <tr class="table-style">
+                       <td>Test Names:</td>
+                       <td><select  id="testName" name="area" style="width: 170px; height: 30px" multiple></select></td>
+                    </tr>
+                    
+                    <tr class="table-style">
+                       <td>Gender:</td>
+					   <td><input type="radio" id="genderChoice1" name="gender" value="male">Male
+						&nbsp&nbsp&nbsp
+					    <input type="radio" id="genderChoice2" name="gender" value="female">Female
+						&nbsp&nbsp&nbsp
+					    <input type="radio" id="genderChoice3" name="gender" value="both">Both</td>
+                    </tr>
+                    
+                    <tr class="table-style">
+                      <td>Age Group:</td>
+                      <td><input type="text" id="ageGroup" name="ageGroup" autocomplete="off" style="width: 360px"></td>
+                    </tr>
+                    
+                    <tr class="table-style">
+                      <td>Frequency:</td>
+                      <td><input type="text" id="frequency" name="frequency" autocomplete="off" style="width: 360px"></td>
+                    </tr>
+                    
+                    <tr class="table-style">
+                      <td>Description:</td>
+                      <td><textarea name="description" id="description" rows="4" cols="50"></textarea></td>
+                    </tr>
+                    
+                    <tr class="table-style">
+                      <td>Recommended For:</td>
+                      <td><textarea name="recommendedFor" id="recommendedFor" rows="4" cols="50"></textarea></td>
+                    </tr>
+                    
+                    <tr class="table-style">
+                      <td>Recommended Body Part:</td>
+                      <td><input type="text" id="bodyPart" name="bodyPart" autocomplete="off" style="width: 360px"></td>
+                    </tr>   
+                    
+                    <tr class="table-style">
+                      <td>Clinical Condition:</td>
+                      <td><input type="text" id="clinicalCondi" name="clinicalCondi" autocomplete="off" style="width: 360px"></td>
+                    </tr>                    
+                    
+                  </tbody>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <div class="form-group">    
+                  <div class="col-sm-offset-8 col-sm-3">
+                  <div id="book1">
+                    <button class="btn btn-brand-blue" id="update">Update</button>
+                    </div>
+                  </div>
+                </div>
+              </div>              
+            </form>
+          <!-- form popup completed -->
+          </div> 
+        </div>
+    </div>
+    
+    
+    
+    
+    <!-- Delete -->
+    
+    <div class="modal fade" id="mymodal2" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form class="form-horizontal color" method="post">
+              <div class="modal-header">
+                <h3 class="modal-title">Delete Package</h3>
+              </div>
+              <div class="modal-footer">
+	              <div id="book1">
+	                    <button class="btn btn-brand-blue" data-dismiss="modal">No</button>
+	                    <button class="btn btn-brand-blue" id="delete">Yes</button>
+	              </div>
+              </div>
+        	</form>
+           </div>  
+        </div>
+      </div>
+    
+    
+</body>
+</html>
