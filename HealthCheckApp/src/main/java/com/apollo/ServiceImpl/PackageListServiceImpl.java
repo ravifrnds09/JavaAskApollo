@@ -37,8 +37,11 @@ public class PackageListServiceImpl implements PackageListService {
 				packTest.setCustomerPackageName(obj[2].toString());
 				packTest.setPackageinclusions(obj[3].toString());
 				packTest.setTariff(obj[4].toString());
-				//packTest.setGender(obj[5].toString());
+				packTest.setGender(obj[5].toString());
+				packTest.setFromAge(obj[6].toString());
+				packTest.setToAge(obj[7].toString());
 				list.add(packTest);
+				System.out.println(list.size());
 			}
 			if (list.size() == 0) {
 				obj.put("status", "no record");

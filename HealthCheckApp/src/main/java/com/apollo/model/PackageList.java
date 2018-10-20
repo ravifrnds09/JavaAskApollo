@@ -9,6 +9,8 @@ public class PackageList {
 	private Integer ServiceId;
 	private String ServiceName;
 	private String gender;
+	private String fromAge;
+	private String toAge;
 	public Integer getHospitalId() {
 		return hospitalId;
 	}
@@ -57,6 +59,18 @@ public class PackageList {
 	}
 	public void setServiceName(String serviceName) {
 		ServiceName = serviceName;
+	}
+	public String getFromAge() {
+		return fromAge;
+	}
+	public void setFromAge(String fromAge) {
+		this.fromAge = fromAge;
+	}
+	public String getToAge() {
+		return toAge;
+	}
+	public void setToAge(String toAge) {
+		this.toAge = toAge;
 	}
 	@Override
 	public String toString() {
