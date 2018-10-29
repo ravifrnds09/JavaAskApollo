@@ -11,6 +11,34 @@ public class PackageList {
 	private String gender;
 	private String fromAge;
 	private String toAge;
+	private String Frequency;
+	private String Package_Description;
+	private String Age_Group_Recommended;
+	private String Recommended_For;
+	public String getFrequency() {
+		return Frequency;
+	}
+	public void setFrequency(String frequency) {
+		Frequency = frequency;
+	}
+	public String getPackage_Description() {
+		return Package_Description;
+	}
+	public void setPackage_Description(String package_Description) {
+		Package_Description = package_Description;
+	}
+	public String getAge_Group_Recommended() {
+		return Age_Group_Recommended;
+	}
+	public void setAge_Group_Recommended(String age_Group_Recommended) {
+		Age_Group_Recommended = age_Group_Recommended;
+	}
+	public String getRecommended_For() {
+		return Recommended_For;
+	}
+	public void setRecommended_For(String recommended_For) {
+		Recommended_For = recommended_For;
+	}
 	public Integer getHospitalId() {
 		return hospitalId;
 	}

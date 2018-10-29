@@ -40,8 +40,11 @@ public class PackageListServiceImpl implements PackageListService {
 				packTest.setGender(obj[5].toString());
 				packTest.setFromAge(obj[6].toString());
 				packTest.setToAge(obj[7].toString());
+				packTest.setFrequency(obj[8].toString());
+				packTest.setPackage_Description(obj[9].toString());
+				packTest.setAge_Group_Recommended(obj[10].toString());
+				packTest.setRecommended_For(obj[11].toString());
 				list.add(packTest);
-				System.out.println(list.size());
 			}
 			if (list.size() == 0) {
 				obj.put("status", "no record");
