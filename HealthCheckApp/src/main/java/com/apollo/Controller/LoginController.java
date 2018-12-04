@@ -46,10 +46,8 @@ public class LoginController {
 	    	    HttpSession session = httpServletRequest.getSession(true);
 	    		userName = login.getUserName();
 	    		session.setAttribute("uName", userName);
-	    		System.out.println("Login Controller called" + session.getAttribute("uName"));
-	    	    	    	    
+				logger.info("Login Controller called: " + session.getAttribute("uName"));
 			}
-	    		    	
 		} catch (Exception e) {
 			logger.info("Login Controller API" + e.getMessage());
 			hcPackageResponse.setResponse("Invalid UserName or Password");

@@ -14,13 +14,13 @@
 		
 		<!-- Medmantra DB -->
 		
-		<property name="hibernate.connection.url">jdbc:mysql://10.40.32.51:3306/Health_Check?autoReconnect=true&amp;useSSL=false</property>
-		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">askHealthCheck@123</property>
-		
-		<!-- <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/Health_Check?autoReconnect=true&amp;useSSL=false</property>
+		<!-- <property name="hibernate.connection.url">jdbc:mysql://10.40.32.51:3306/Health_Check?autoReconnect=true&amp;useSSL=false</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password">askHealthCheck@123</property> -->
+		
+		<property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/Health_Check?autoReconnect=true&amp;useSSL=false</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">askHealthCheck@123</property>
 						
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="javax.persistence.validation.mode">none</property>
