@@ -15,6 +15,7 @@ public class PackageList {
 	private String Package_Description;
 	private String Age_Group_Recommended;
 	private String Recommended_For;
+	private int age;
 	public String getFrequency() {
 		return Frequency;
 	}
@@ -51,12 +52,7 @@ public class PackageList {
 	public void setRegionId(Integer regionId) {
 		this.regionId = regionId;
 	}
-	public String getGender() {
-		return gender;
-	}
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+	
 	public String getCustomerPackageName() {
 		return CustomerPackageName;
 	}
@@ -99,6 +95,20 @@ public class PackageList {
 	}
 	public void setToAge(String toAge) {
 		this.toAge = toAge;
+	}
+	
+	
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
 	}
 	@Override
 	public String toString() {
