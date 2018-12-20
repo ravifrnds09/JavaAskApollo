@@ -31,5 +31,15 @@ public class PackageListController {
 		service=new PackageListServiceImpl();
 		return service.RegisterPackges(test);
 	}
+	@POST
+	@Path("/filterList")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String fetchDetails(PackageList packageList)
+	{
+		logger.info("packageTest Controller");
+		service=new PackageListServiceImpl();
+		return service.fetchPackages(packageList);
+	}
 
 }
