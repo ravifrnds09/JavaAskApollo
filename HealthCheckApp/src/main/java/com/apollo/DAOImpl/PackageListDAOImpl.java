@@ -24,11 +24,15 @@ public class PackageListDAOImpl implements PackageListDAO {
 		try{
 			factory=HibernateUtil.getSessionFactory();
 			session=factory.openSession();
-		    Query PackageQuery=session.createSQLQuery("CALL "+"hc_get_Medmantra_Package_Price_With_Location_New(?,?)");
-			PackageQuery.setInteger(0,pack.getRegionId());
+			Query PackageQuery = session
+					.createSQLQuery("CALL " + "hc_get_Medmantra_Package_Price_With_Location_New(?,?,?,?)");
+			PackageQuery.setInteger(0, pack.getRegionId());
 			PackageQuery.setInteger(1, pack.getHospitalId());
+			PackageQuery.setInteger(2, pack.getAge());
+			PackageQuery.setString(3, pack.getGender());
+			list = PackageQuery.list();
 			list=PackageQuery.list();
-			//System.out.println(list);
+			
 		}
 		catch (Exception e) {
 			logger.info("Package Registration DAO called: Exception: " + e.getStackTrace());

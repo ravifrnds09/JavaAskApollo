@@ -15,6 +15,7 @@ public class PackageList {
 	private String Package_Description;
 	private String Age_Group_Recommended;
 	private String Recommended_For;
+	private int age;
 	public String getFrequency() {
 		return Frequency;
 	}
@@ -100,11 +101,21 @@ public class PackageList {
 	public void setToAge(String toAge) {
 		this.toAge = toAge;
 	}
+	
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
 	@Override
 	public String toString() {
-		return "PackageList [hospitalId=" + hospitalId + ", regionId=" + regionId + ", gender=" + gender
-				+ ", CustomerPackageName=" + CustomerPackageName + ", Packageinclusions=" + Packageinclusions
-				+ ", Tariff=" + Tariff + ", ServiceId=" + ServiceId + ", ServiceName=" + ServiceName + "]";
+		return "PackageList [hospitalId=" + hospitalId + ", regionId=" + regionId + ", CustomerPackageName="
+				+ CustomerPackageName + ", Packageinclusions=" + Packageinclusions + ", Tariff=" + Tariff
+				+ ", ServiceId=" + ServiceId + ", ServiceName=" + ServiceName + ", gender=" + gender + ", fromAge="
+				+ fromAge + ", toAge=" + toAge + ", Frequency=" + Frequency + ", Package_Description="
+				+ Package_Description + ", Age_Group_Recommended=" + Age_Group_Recommended + ", Recommended_For="
+				+ Recommended_For + ", age=" + age + "]";
 	}
 	
 	
