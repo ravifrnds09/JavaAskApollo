@@ -7,14 +7,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
-import org.json.JSONObject;
-
 import com.apollo.Service.PackageListService;
-import com.apollo.Service.PackageTestService;
 import com.apollo.ServiceImpl.PackageListServiceImpl;
-import com.apollo.ServiceImpl.PackageTestServiceImpl;
 import com.apollo.model.PackageList;
-import com.apollo.model.PackageTest;
 
 @Path("/package")
 public class PackageListController {

@@ -10,7 +10,6 @@ import com.apollo.DAO.PackageListDAO;
 import com.apollo.DAOImpl.PackageListDAOImpl;
 import com.apollo.Service.PackageListService;
 import com.apollo.model.PackageList;
-import com.apollo.model.PackageTest;
 
 public class PackageListServiceImpl implements PackageListService {
 	
@@ -25,7 +24,6 @@ public class PackageListServiceImpl implements PackageListService {
 		PackageList packTest=null;
 		obj=new JSONObject();
 		List testlist=dao.SavePackages(test);
-		System.out.println(testlist);
 		list=new ArrayList<>();
 		String info=null;
 		try {

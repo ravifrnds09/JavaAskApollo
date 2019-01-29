@@ -42,6 +42,7 @@ public class TestServiceImpl implements TestService{
 				hcTest.setParamNamesString(testObject[2] == null ? "" : (String) testObject[2]);
 				
 				testList.add(hcTest);
+				logger.info("Test list is "+hcTest.toString());
 			}
 			
 		} catch (Exception e) {
@@ -67,8 +68,12 @@ public class TestServiceImpl implements TestService{
 			response = String.valueOf(testDAO.addTestDAO(test));
 			if (response != null) {
 				packageResponse.setResponse(response);
+				logger.info("Test Delete service called: Response " + packageResponse.toString());
+				logger.info("Test Delete service called: Response " + response);
 			} else {
 				packageResponse.setResponse("Falied to add Test");
+				logger.info("Test Delete service called: Response " + packageResponse.toString());
+				logger.info("Test Delete service called: Response " + response);
 			}
 			
 		} catch (Exception e) {
@@ -94,9 +99,12 @@ public class TestServiceImpl implements TestService{
 			if (response != null) {
 				
 				packageResponse.setResponse(response);
-				
+				logger.info("Test update service called: Response " + response);
+				logger.info("Test update service called: Response " + packageResponse.toString());
 			} else {
 				packageResponse.setResponse("Falied to update Test");
+				logger.info("Test update service called: Response " + response);
+				logger.info("Test update service called: Response " + packageResponse.toString());
 			}
 			
 		} catch (Exception e) {
@@ -122,7 +130,8 @@ public class TestServiceImpl implements TestService{
 			if (response != null) {
 				
 				packageResponse.setResponse(response);
-				
+				logger.info("Test Delete service called: Response " + packageResponse.toString());
+				logger.info("Test Delete service called: Response " + response);
 			} else {
 				packageResponse.setResponse("Falied to delete Test");
 			}

@@ -39,8 +39,11 @@ public class PackageMappingController {
 		packageMappingService = new PackageMappingServiceImpl();
 		List<HCPackageMappingComplete> packageList = new ArrayList<>();
 		
+		logger.info("Package Complete List Controller Called Response "+packageList);
+		
 		try {
 			packageList = packageMappingService.getFullPackageDataService(hcPackage);
+			logger.info("Package Complete List Controller Called Response "+packageList);
 		} catch (Exception e) {
 			logger.info("Package List Controller Called: Exception: " + e.getStackTrace());
 			e.printStackTrace();
@@ -60,7 +63,7 @@ public class PackageMappingController {
 			
 			packageMappingService = new PackageMappingServiceImpl();
 			hcServiceList = packageMappingService.serviceMasterListService();
-			
+			logger.info("Package Master List Controller Called Response "+hcServiceList);
 		} catch (Exception e) {
 			logger.info("Service Master list Controller : Exception: " + e.getStackTrace());
 			e.printStackTrace();
@@ -81,6 +84,7 @@ public class PackageMappingController {
 			
 			packageMappingService = new PackageMappingServiceImpl();
 			hcPackageMappingsList = packageMappingService.mappingListService();
+			logger.info("Package Mapping list Controller: list  " + hcPackageMappingsList);
 			
 		} catch (Exception e) {
 			logger.info("Package Mapping list Controller: Exception: " + e.getStackTrace());
@@ -103,7 +107,8 @@ public class PackageMappingController {
 			
 			packageMappingService = new PackageMappingServiceImpl();
 			hcPackageResponse = packageMappingService.mappingAddService(hcPackageMapping);
-			
+			logger.info("Add Package Mapping Controller Called: Adding Service : " + hcPackageResponse);
+			logger.info("Add Package Mapping Controller Called: Adding Service : " + hcPackageMapping.toString());
 		} catch (Exception e) {
 			logger.info("Add Package Mapping Controller Called: Exception: " + e.getStackTrace());
 			hcPackageResponse.setResponse("Failed to Add Package Mapping");
@@ -125,7 +130,7 @@ public class PackageMappingController {
 			
 			packageMappingService = new PackageMappingServiceImpl();
 			hcPackageResponse = packageMappingService.mappingUpdateService(hcPackageMapping);
-			
+			logger.info("Update Package Mapping Controller Called: Update Mapping: " + hcPackageResponse);
 		} catch (Exception e) {
 			logger.info("Update Package Mapping Controller Called: Exception: " + e.getStackTrace());
 			hcPackageResponse.setResponse("Failed to Update Package Mapping");
@@ -147,6 +152,8 @@ public class PackageMappingController {
 			
 			packageMappingService = new PackageMappingServiceImpl();
 			hcPackageResponse = packageMappingService.mappingDeleteService(hcPackageMapping);
+			logger.info("Delete Package Mapping Delete Controller Called: : " + hcPackageResponse);
+			logger.info("Delete Package Mapping Delete Controller Called "+hcPackageMapping.toString());
 			
 		} catch (Exception e) {
 			logger.info("Delete Package Mapping Controller Called: Exception: " + e.getStackTrace());
@@ -167,7 +174,8 @@ public class PackageMappingController {
 						
 			packageMappingService = new PackageMappingServiceImpl();
 			hcServiceList = packageMappingService.serviceMasterListSearchService(PackageName);
-			
+			logger.info("Service Master list Controller Search: : " + hcServiceList);
+			logger.info("Service Master list Controller Search: : " + PackageName.toString());
 		} catch (Exception e) {
 			logger.info("Service Master list Controller Search: Exception: " + e.getStackTrace());
 			e.printStackTrace();
@@ -189,6 +197,8 @@ public class PackageMappingController {
 			packageMappingService = new PackageMappingServiceImpl();
 			hcServiceList = packageMappingService.getServiceMasterByLocationId(hcServiceMaster);
 			
+			logger.info("Service Master list Controller serviceListByLocationId is called : " +hcServiceList);
+			logger.info("Service Master list Controller serviceListByLocationId is called : " +hcServiceMaster.toString());
 		} catch (Exception e) {
 			logger.info("Service Master list Controller Search: Exception: " + e.getStackTrace());
 			e.printStackTrace();
@@ -209,7 +219,8 @@ public class PackageMappingController {
 						
 			packageMappingService = new PackageMappingServiceImpl();
 			hcServiceList = packageMappingService.getServiceMasterByLocationId(hcServiceMaster);
-			
+			logger.info("Service Master list Controller savePackageMappingByPackageIdAndLocationId Search: : " + hcServiceList);
+			logger.info("Service Master list Controller savePackageMappingByPackageIdAndLocationId Search: : " + hcServiceMaster.toString());
 		} catch (Exception e) {
 			logger.info("Service Master list Controller Search: Exception: " + e.getStackTrace());
 			e.printStackTrace();

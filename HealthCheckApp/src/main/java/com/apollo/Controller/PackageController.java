@@ -39,6 +39,7 @@ public class PackageController {
 		
 		try {
 			packageList = packageService.getPackageService();
+			logger.info("Package List Controller Called: Response : " + packageList);
 		} catch (Exception e) {
 			logger.info("Package List Controller Called: Exception: " + e.getStackTrace());
 			e.printStackTrace();
@@ -59,7 +60,7 @@ public class PackageController {
 			
 			packageService = new PackageServiceImpl();
 			packageService.addPackage(packag);
-			
+			logger.info("Package List Controller Called: Response : "+packag.toString()+" "+packageService.addPackage(packag));
 		} catch(Exception e) {
 			logger.info("Package add controller called: Exception: " + e.getStackTrace());
 			hcPackageResponse.setResponse("Falied to add Package");
@@ -81,6 +82,8 @@ public class PackageController {
 			packageService = new PackageServiceImpl();
 			packageService.updatePackage(packag);
 			
+			logger.info("Package update controller called: " + packag.toString()+" "+hcPackageResponse.toString());
+			
 		} catch(Exception e) {
 			logger.info("Package update controller called: Exception: " + e.getStackTrace());
 			hcPackageResponse.setResponse("Falied to update Package");
@@ -101,7 +104,7 @@ public class PackageController {
 			
 			packageService = new PackageServiceImpl();
 			hcPackageResponse = packageService.deletePackage(packag);
-			
+			logger.info("Package delete controller called: " + packag.toString()+" "+hcPackageResponse.toString());
 		} catch(Exception e) {
 			logger.info("Package delete controller called: Exception: " + e.getStackTrace());
 			hcPackageResponse.setResponse("Falied to delete Package");

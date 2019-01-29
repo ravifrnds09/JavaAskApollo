@@ -131,5 +131,15 @@ public class HCPackage {
 	public void setLocationId(int locationId) {
 		this.locationId = locationId;
 	}
+
+	@Override
+	public String toString() {
+		return "HCPackage [packageId=" + packageId + ", packageName=" + packageName + ", gender=" + gender
+				+ ", bodyPart=" + bodyPart + ", clinicalCondi=" + clinicalCondi + ", frequency=" + frequency
+				+ ", ageGroup=" + ageGroup + ", description=" + description + ", recommendedFor=" + recommendedFor
+				+ ", testNamesString=" + testNamesString + ", genderId=" + genderId + ", ageId=" + ageId
+				+ ", locationId=" + locationId + "]";
+	}
+	
 			
 }

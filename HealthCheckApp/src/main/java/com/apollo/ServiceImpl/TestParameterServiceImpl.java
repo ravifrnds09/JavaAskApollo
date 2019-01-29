@@ -41,7 +41,10 @@ public class TestParameterServiceImpl implements TestParameterService {
 				
 				testParameterList.add(hcTestParameter);
 				
+				logger.info("Test Parameter list ServiceImpl called"+hcTestParameter.toString());	
+				
 			}
+			
 			
 		} catch (Exception e) {
 			logger.info("Test Parameter list ServiceImpl called: Exception: " + e.getStackTrace());
@@ -64,7 +67,8 @@ public class TestParameterServiceImpl implements TestParameterService {
 			
 			String response = testParameterDAO.addTestParameterDAO(testParameter);
 			testParameterResponse.setResponse(response);
-				
+			logger.info("Test Parameter add ServiceImpl called "+response);	
+			logger.info("Test Parameter add ServiceImpl called "+testParameter.toString());
 		} catch (Exception e) {
 			logger.info("Test Parameter add ServiceImpl called: Exception: " + e.getStackTrace());
 			testParameterResponse.setResponse("Failed to add Test Parameter");
@@ -80,11 +84,12 @@ public class TestParameterServiceImpl implements TestParameterService {
 		
 		try { 
 			
-			logger.info("Test Parameter update ServiceImpl called: Exception: ");
+			logger.info("Test Parameter update ServiceImpl called: ");
 			testParameterDAO = new TestParameterDAOImpl();
 			String response = testParameterDAO.updateTestParameterDAO(testParameter);
 			testParameterResponse.setResponse(response);
-			
+			logger.info("Test Parameter update ServiceImpl called: "+response);	
+			logger.info("Test Parameter update ServiceImpl called: "+testParameter.toString());
 		} catch (Exception e) {
 			logger.info("Test Parameter update ServiceImpl called: Exception: " + e.getStackTrace());
 			testParameterResponse.setResponse("Failed to Update Test Parameter");
@@ -100,11 +105,12 @@ public class TestParameterServiceImpl implements TestParameterService {
 		
 		try { 
 			
-			logger.info("Test Parameter delete ServiceImpl called: Exception: ");
+			logger.info("Test Parameter delete ServiceImpl called ");
 			testParameterDAO = new TestParameterDAOImpl();
 			String response = testParameterDAO.deleteTestParameterDAO(testParameter);
 			testParameterResponse.setResponse(response);
-			
+			logger.info("Test Parameter delete ServiceImpl called: "+response);	
+			logger.info("Test Parameter delete ServiceImpl called: "+testParameter.toString());
 		} catch (Exception e) {
 			logger.info("Test Parameter delete ServiceImpl called: Exception: " + e.getStackTrace());
 			testParameterResponse.setResponse("Failed to Update Test Parameter");

@@ -32,7 +32,7 @@ public class TestDAOImpl implements TestDAO {
 			logger.info("Test list DAO called");
 			Query testListQrery = session.createSQLQuery("CALL " + "hc_get_test()");
 			paramList = testListQrery.list();
-					
+			logger.info("Test list DAO called: Response : " + paramList);		
 		} catch (Exception e) {
 			logger.info("Test list DAO called: Exception: " + e.getStackTrace());
 			e.printStackTrace();
@@ -65,7 +65,7 @@ public class TestDAOImpl implements TestDAO {
 			testAddQrery.setString(1, test.getParamNamesString().equals("")  ? null : test.getParamNamesString());
 			testAddQrery.setString(2, test.getTestDesc());
 			response = (String) testAddQrery.uniqueResult();
-					
+			logger.info("Test add DAO called: Response : " + response);		
 			tx.commit();
 		} catch (Exception e) {
 			logger.info("Test add DAO called: Exception: " + e.getStackTrace());
@@ -101,7 +101,7 @@ public class TestDAOImpl implements TestDAO {
 			testUpdateQrery.setString(2, test.getTestDesc());
 			testUpdateQrery.setString(3, test.getParamNamesString());
 			response = (String) testUpdateQrery.uniqueResult();
-			
+			logger.info("Test update DAO called: : " + response);
 			tx.commit();
 		} catch (Exception e) {
 			logger.info("Test update DAO called: Exception: " + e.getStackTrace());
@@ -132,6 +132,8 @@ public class TestDAOImpl implements TestDAO {
 			testDeleteQrery.executeUpdate();
 			
 			response = "Successfully deleted";
+			
+			logger.info("Test delete DAO called: : " + response);
 			
 		} catch (Exception e) {
 			logger.info("Test delete DAO called: Exception: " + e.getStackTrace());

@@ -43,5 +43,12 @@ public class HCServiceMaster {
 	public void setLocationId(String locationId) {
 		this.locationId = locationId;
 	}
+
+	@Override
+	public String toString() {
+		return "HCServiceMaster [serviceId=" + serviceId + ", serviceCode=" + serviceCode + ", serviceName="
+				+ serviceName + ", locationId=" + locationId + "]";
+	}
+	
 	
 }

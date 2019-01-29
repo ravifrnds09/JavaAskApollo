@@ -37,9 +37,9 @@ public class TestController {
 		
 			testService = new TestServiceImpl();
 			testList = testService.getTestList();
-			
+			logger.info("Test list controller called i.e showing test details: " + testList);
 		} catch (Exception e) {
-			logger.info("Test list controller called: Exception: " + e.getStackTrace());
+			logger.info("Test list controller called: Exception: " + e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -59,7 +59,8 @@ public class TestController {
 			
 			testService = new TestServiceImpl();
 			hcPackageResponse = testService.addTest(test);
-			
+			logger.info("Test list controller Adding New page Service is called i.e showing test details: " + hcPackageResponse);
+			logger.info("Test list controller Adding New package page Service is called i.e showing test details: " + hcPackageResponse.toString());
 		} catch(Exception e) {
 			logger.info("Test add controller called: Exception: " + e.getStackTrace());
 			hcPackageResponse.setResponse("Falied to add Test");
@@ -81,7 +82,7 @@ public class TestController {
 		
 			testService = new TestServiceImpl();
 			testService.updateTest(test);
-		
+			logger.info("Test list controller Updating Existing package page Service is called i.e showing test details: " + test.toString());
 		} catch(Exception e) {
 			logger.info("Test update controller called: Exception: " + e.getStackTrace());
 			hcPackageResponse.setResponse("Falied to update Test");
@@ -102,7 +103,7 @@ public class TestController {
 		try {	
 			testService = new TestServiceImpl();
 			testService.deleteTest(test);
-			
+			logger.info("Test delete controller called: : " + test.toString());
 		} catch(Exception e) {
 			logger.info("Test delete controller called: Exception: " + e.getStackTrace());
 			hcPackageResponse.setResponse("Falied to delete Test");

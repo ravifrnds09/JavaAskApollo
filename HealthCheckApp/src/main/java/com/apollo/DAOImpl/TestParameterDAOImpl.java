@@ -33,7 +33,7 @@ public class TestParameterDAOImpl implements TestParameterDAO {
 			
 			Query paramListQrery = session.createSQLQuery("CALL " + "hc_get_test_param()");
 			paramList = paramListQrery.list();
-			
+			logger.info("Test Parameter DAOImpl: : " + paramList);
 		} catch (Exception e) {
 			logger.info("Test Parameter DAOImpl: Exception: " + e.getStackTrace());
 			e.printStackTrace();
@@ -68,6 +68,8 @@ public class TestParameterDAOImpl implements TestParameterDAO {
 			addParamQrery.setString(1, testParameter.getParamDesc());
 			addParamQrery.setString(2, testParameter.getAlterName());
 			response = (String) addParamQrery.uniqueResult();
+			
+			logger.info("Test Parameter Insert  DAOImpl:response : " + response);
 			tx.commit();	
 		} catch (Exception e) { 
 			logger.info("Test Parameter add DAOImpl: Exception: " + e.getStackTrace());
@@ -102,6 +104,9 @@ public class TestParameterDAOImpl implements TestParameterDAO {
 			updateParamQrery.setString(2, testParameter.getParamDesc());
 			updateParamQrery.setString(3, testParameter.getAlterName());
 			response = (String) updateParamQrery.uniqueResult();
+			
+			logger.info("Test Parameter Update  DAOImpl:response : " + response);
+			System.out.println(response);
 			tx.commit();
 		} catch (Exception e) {
 			logger.info("Test Parameter update DAOImpl: Exception: " + e.getStackTrace());
@@ -133,6 +138,7 @@ public class TestParameterDAOImpl implements TestParameterDAO {
 			Query updateParamQrery = session.createSQLQuery("CALL " + "hc_del_test_param(?)");
 			updateParamQrery.setInteger(0, testParameter.getParamId());
 			response = (String) updateParamQrery.uniqueResult();
+			logger.info("Test Parameter delete  DAOImpl:response : " + response);
 			tx.commit();
 		} catch (Exception e) { 
 			logger.info("Test Parameter delete DAOImpl: Exception: " + e.getStackTrace());

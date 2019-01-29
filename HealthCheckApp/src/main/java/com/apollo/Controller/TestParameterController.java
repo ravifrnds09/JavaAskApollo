@@ -35,6 +35,8 @@ public class TestParameterController {
 		List<HCTestParameter> listObj =null;
 		try {
 			listObj = testParameterService.testParamList();		
+			
+			logger.info("list parameter controller called: : " + listObj);
 		} catch(Exception e) {
 			logger.info("list parameter controller called: Exception: " + e.getStackTrace());
 			e.printStackTrace();
@@ -58,7 +60,8 @@ public class TestParameterController {
 			
 			testParameterService = new TestParameterServiceImpl();
 			testParameterResponse = testParameterService.deleteTestParameter(testParameter);
-			
+			logger.info("delete parameter controller called: : " + testParameterResponse);
+			logger.info("delete parameter controller called: : " + testParameter.toString());
 		} catch (Exception e) {
 			logger.info("delete parameter controller called: Exception: " + e.getStackTrace());
 			testParameterResponse.setResponse("Failed to delete Test Parameter");
@@ -83,6 +86,9 @@ public class TestParameterController {
 			testParameterService = new TestParameterServiceImpl();
 			testParameterResponse  = testParameterService.updateTestParameter(testParameter);
 			
+			logger.info("update parameter controller called: : " + testParameterResponse);
+			logger.info("update parameter controller called: : " + testParameter.toString());
+			
 		} catch (Exception e) {
 			logger.info("update parameter controller called: Exception: " + e.getStackTrace());
 			testParameterResponse.setResponse("Failed to update Test Parameter");
@@ -105,7 +111,8 @@ public class TestParameterController {
 			
 			testParameterService = new TestParameterServiceImpl();
 			testParameterResponse = testParameterService.addTestParameter(testParameter);
-			
+			logger.info("add parameter controller called: : " + testParameterResponse);
+			logger.info("add parameter controller called: Response : " + testParameter.toString());
 		} catch (Exception e) {
 			logger.info("add parameter controller called: Exception: " + e.getStackTrace());
 			testParameterResponse.setResponse("Failed to add Test Parameter");

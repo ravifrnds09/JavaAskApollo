@@ -4,6 +4,8 @@ import java.math.BigInteger;
 
 public class HCPackageMappingComplete {
 	
+	
+
 	private BigInteger serviceId;
 	
 	private String serviceName;
@@ -62,6 +64,12 @@ public class HCPackageMappingComplete {
 
 	public void setPrice(BigInteger price) {
 		this.price = price;
+	}
+	@Override
+	public String toString() {
+		return "HCPackageMappingComplete [serviceId=" + serviceId + ", serviceName=" + serviceName + ", locationId="
+				+ locationId + ", locationName=" + locationName + ", testInclusions=" + testInclusions + ", price="
+				+ price + "]";
 	}
 	
 }

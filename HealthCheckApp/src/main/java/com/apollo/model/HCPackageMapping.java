@@ -71,5 +71,13 @@ public class HCPackageMapping {
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
+
+	@Override
+	public String toString() {
+		return "HCPackageMapping [packageId=" + packageId + ", packageName=" + packageName + ", serviceNamesString="
+				+ serviceNamesString + ", subPackagesString=" + subPackagesString + ", locationId=" + locationId
+				+ ", locationName=" + locationName + ", createdDate=" + createdDate + "]";
+	}
+	
 	
 }

@@ -41,5 +41,12 @@ public class HCTest {
 	public void setParamNamesString(String paramNamesString) {
 		this.paramNamesString = paramNamesString;
 	}
+
+	@Override
+	public String toString() {
+		return "HCTest [testId=" + testId + ", testName=" + testName + ", testDesc=" + testDesc + ", paramNamesString="
+				+ paramNamesString + "]";
+	}
+	
 		
 }

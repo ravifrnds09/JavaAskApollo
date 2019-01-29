@@ -21,5 +21,11 @@ public class LocationResponse {
 	public void setLocationName(String locationName) {
 		this.locationName = locationName;
 	}
+
+	@Override
+	public String toString() {
+		return "LocationResponse [locationId=" + locationId + ", locationName=" + locationName + "]";
+	}
+	
 	
 }

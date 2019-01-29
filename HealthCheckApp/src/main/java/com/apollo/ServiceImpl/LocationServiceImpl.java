@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 
 import com.apollo.DAO.LocationDAO;
 import com.apollo.DAOImpl.LocationDAOImpl;
 import com.apollo.Service.LocationService;
+import com.apollo.model.HospitalList;
 import com.apollo.model.LocationResponse;
+import com.apollo.model.PackageList;
+
 
 public class LocationServiceImpl implements LocationService {
 	
@@ -29,8 +33,8 @@ public class LocationServiceImpl implements LocationService {
 				locationResponse = new LocationResponse();
 				locationResponse.setLocationId((String) object[0]);
 				locationResponse.setLocationName((String) object[1]);
-				
 				locationResponseList.add(locationResponse);
+				logger.info("Get All Medmantra Locations Service Response is "+locationResponse.toString());
 			}
 			
 		} catch(Exception e) {
@@ -39,6 +43,40 @@ public class LocationServiceImpl implements LocationService {
 		}
 		
 		return locationResponseList;
+	}
+	@Override
+	public String GetHospitals(HospitalList cityId) {
+		logger.info("Get Hospitals Locations Service Response is ");
+		locationDAO = new LocationDAOImpl();
+		String response = null;
+		List list=null;
+		HospitalList packTest=null;
+		JSONObject obj=new JSONObject();
+		List testlist=locationDAO.GetHospitals(cityId);
+		list=new ArrayList<>();
+		String info=null;
+		try {
+			for (Object result : testlist) {
+				Object[] object = (Object[]) result;
+				packTest = new HospitalList();
+				packTest.setHospitalId(Integer.parseInt(object[0].toString()));
+				packTest.setHospitalName(object[1].toString());
+				list.add(packTest);
+				logger.info("Get Hospitals Locations Service Response is "+packTest.toString());
+			}
+			if (list.size() == 0) {
+				obj.put("hospialList", list);
+				obj.put("status", "no record");
+			} else {
+					obj.put("hospialList", list);
+					obj.put("status", "success");
+			}
+			logger.info("Package add Service called");
+		} catch (Exception e) {
+			logger.info("Package add Service called: Exception: " + e.getStackTrace());
+			e.printStackTrace();
+		}
+		return obj.toString();
 	}
 
 }

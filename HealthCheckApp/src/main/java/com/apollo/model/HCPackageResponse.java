@@ -43,5 +43,12 @@ public class HCPackageResponse {
 	public void setPackageResponseList(List<HCPackage> packageResponseList) {
 		this.packageResponseList = packageResponseList;
 	}
+
+	@Override
+	public String toString() {
+		return "HCPackageResponse [response=" + response + ", testParamResponseList=" + testParamResponseList
+				+ ", testResponseList=" + testResponseList + ", packageResponseList=" + packageResponseList + "]";
+	}
+	
 			
 }

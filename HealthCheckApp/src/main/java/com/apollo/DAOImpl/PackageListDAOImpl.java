@@ -15,15 +15,15 @@ import com.apollo.model.PackageList;
 
 public class PackageListDAOImpl implements PackageListDAO {
 	private final Logger logger = Logger.getLogger(PackageListDAOImpl.class);
-	private SessionFactory factory;
+	private SessionFactory sessionFactory;
 	private Session session;
 	@Override
 	public List SavePackages(PackageList pack) {
 		logger.info("Get Packages DAO");
 		List list=null;
 		try{
-			factory=HibernateUtil.getSessionFactory();
-			session=factory.openSession();
+			sessionFactory = HibernateUtil.getSessionFactory();
+			session=sessionFactory.openSession();
 			Query PackageQuery = session
 					.createSQLQuery("CALL " + "hc_get_Medmantra_Package_Price_With_Location_New(?,?,?,?)");
 			PackageQuery.setInteger(0, pack.getRegionId());
