@@ -8,5 +8,5 @@ import com.apollo.model.LocationResponse;
 public interface LocationService {
 	
 	public List<LocationResponse> getAllLocationService();
-	public String GetHospitals(HospitalList cityId);
+	public String getHospitals(HospitalList hospitalList);
 }

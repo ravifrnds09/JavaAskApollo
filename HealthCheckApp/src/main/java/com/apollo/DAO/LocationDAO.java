@@ -8,6 +8,6 @@ public interface LocationDAO {
 	
 	public List<Object[]> getAllLocationsDAO();
 	
-	public List GetHospitals(HospitalList cityId);
+	public List getHospitals(HospitalList hospitalList);
 	
 }

@@ -43,14 +43,14 @@ public class LocationDAOImpl implements LocationDAO {
 	}
 
 	@Override
-	public List GetHospitals(HospitalList cityId) {
+	public List getHospitals(HospitalList hospitalList) {
 		logger.info("Get Packages DAO");
 		List result = null;
 		try {
 			sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession();
 			Query PackageQuery = session.createSQLQuery("CALL " + "hc_get_hospitals_list(?)");
-			PackageQuery.setString(0, cityId.getCityId());
+			PackageQuery.setString(0, hospitalList.getCityId());
 			result = PackageQuery.list();
 			logger.info("Hospital List DAO called List  " + result);
 		} catch (Exception e) {

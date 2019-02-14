@@ -45,14 +45,14 @@ public class LocationServiceImpl implements LocationService {
 		return locationResponseList;
 	}
 	@Override
-	public String GetHospitals(HospitalList cityId) {
+	public String getHospitals(HospitalList hospitalList) {
 		logger.info("Get Hospitals Locations Service Response is ");
 		locationDAO = new LocationDAOImpl();
 		String response = null;
 		List list=null;
 		HospitalList packTest=null;
 		JSONObject obj=new JSONObject();
-		List testlist=locationDAO.GetHospitals(cityId);
+		List testlist=locationDAO.getHospitals(hospitalList);
 		list=new ArrayList<>();
 		String info=null;
 		try {
@@ -61,6 +61,8 @@ public class LocationServiceImpl implements LocationService {
 				packTest = new HospitalList();
 				packTest.setHospitalId(Integer.parseInt(object[0].toString()));
 				packTest.setHospitalName(object[1].toString());
+				packTest.setUnit_ID(object[2].toString());
+				packTest.setPayment_Availability(object[3].toString());
 				list.add(packTest);
 				logger.info("Get Hospitals Locations Service Response is "+packTest.toString());
 			}

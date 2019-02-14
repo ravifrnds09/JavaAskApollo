@@ -46,13 +46,13 @@ public class LocationController {
 	@Path("/getHospitalName")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String getHospitalLocation(HospitalList list) {
+	public String getHospitalLocation(HospitalList hospitalList) {
 		
 		logger.info("Get All Apollo Hospitals Locations Controller");
 		String response = null;
 		try {
 			locationService = new LocationServiceImpl();
-			response = locationService.GetHospitals(list);
+			response = locationService.getHospitals(hospitalList);
 			logger.info("Apollo Hospitals Controller Response "+response);
 		} catch (Exception e) {
 			logger.info("Get All Apollo Hospitals Locations Controller: Exception: " + e);
