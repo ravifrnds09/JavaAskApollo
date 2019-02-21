@@ -145,17 +145,17 @@ var description;
 var recommenedfor;
 var agegroup;
 var frequency;
-
-
+var fromAge;
+var toAge;
 $(document).ready(function() {
 
-	 //var URL = "http://localhost:8080";
+	 //var URL = "http://localhost:8086";
 	
 	 //var URL = "https://devapp.askapollo.com";
 	
-	 //var URL = "https://apptest.askapollo.com";
+	 var URL = "https://apptest.askapollo.com";
 	 
-	 var URL = "http://10.40.32.51:8080";
+	// var URL = "http://10.40.32.51:8080";
 	 
 	window.addEventListener( "pageshow", function ( event ) {
 		  var historyTraversal = event.persisted || 
@@ -193,9 +193,7 @@ $(document).ready(function() {
 	    },
 	    
         success: function (data) {
-           	
             var select = document.getElementById("testNameAdd");
-			
 	            for(var i=0;i< data.length; i++) {
 					id = data[i].testId;
 					name = data[i].testName;
@@ -236,15 +234,16 @@ $(document).ready(function() {
 					}
 				});
 			}
+		  var fromAgeAdd=$("#fromAgeAdd").val();
+		  var toAgeAdd=$("#toAgeAdd").val();
 		  	if ($.trim(packageNameAdd).length == 0 || packageNameAdd == "") {
 		        alert("Please Enter Package Name");
 		        return false;
 		    } else {
-		    	
 				  $.ajax({
 				      type: 'POST',
 				      url : URL +  "/HealthCheckApp/apollo/package/add",
-				      data : JSON.stringify({"packageName":packageNameAdd,"description":descriptionAdd,"recommendedFor":recommendedForAdd,"ageGroup":ageGroupAdd,"frequency":frequencyAdd,"testNamesString":selectTestString,"gender":genderAdd,"bodyPart":recommenBodyPartAdd,"clinicalCondi":clinicalConditionAdd}),
+				      data : JSON.stringify({"packageName":packageNameAdd,"description":descriptionAdd,"recommendedFor":recommendedForAdd,"ageGroup":ageGroupAdd,"frequency":frequencyAdd,"testNamesString":selectTestString,"gender":genderAdd,"bodyPart":recommenBodyPartAdd,"clinicalCondi":clinicalConditionAdd,"fromAge":fromAgeAdd,"toAge":toAgeAdd}),
 				      dataType : 'json',
 				      contentType: "application/json; charset=utf-8",
 				      success : function(data) {
@@ -254,7 +253,6 @@ $(document).ready(function() {
 				    	  window.top.location=URL + "/HealthCheckApp/packageDetails";
 				      }
 				});
-				   //ResetForm();
 		    }
 	});
 	
@@ -268,15 +266,14 @@ $(document).ready(function() {
 	
  	$('#my-table-book').show();
 	$('#doctorlist').show();
- 	
 	tables= $('#doctorlist').DataTable({
 	destroy: true,
     searching: true,
 		 "ajax" : {
 	      "type" : "GET",
-		  "url" : URL + "/HealthCheckApp/apollo/package/list",
+		  "url" : URL + "/HealthCheckApp/apollo/package/list1",
 		  "dataSrc" : function (json) {
-	            var return_data = new Array();
+			  var return_data = new Array();
 	            for(var i=0;i< json.length; i++){
 	              return_data.push({
 	                'packageId': json[i].packageId,
@@ -289,47 +286,50 @@ $(document).ready(function() {
 	                'gender' : json[i].gender,
 	                'bodyPart' : json[i].bodyPart,
 	                'condition' : json[i].clinicalCondi,
+	                'fromAge':json[i].fromAge,
+	                'toAge':json[i].toAge
 	              })
 	            }
 	            return return_data;
 	          }
-		   
 		 },
 		 "columns": [{ "data": "packageId", width:5},
 		             {"data":"packageName", width:150},
 		       		 {"data":"testNamesString", width:250},
 		       		 {"data": "frequency", width:90},
-		    		 {"defaultContent": "<button  class=\"select\" data-toggle=\"modal\" data-target=\"#mymodal2\" data-keyboard=\"false\" data-backdrop=\"static\">Delete</button>", width: 30},
-		    		 {"defaultContent": "<button  class=\"select\" data-toggle=\"modal\" data-target=\"#mymodal1\" data-keyboard=\"false\" data-backdrop=\"static\">Edit</button>", width: 30},
+		    		 {"defaultContent": "<button  class=\"select delete-btn\" data-toggle=\"modal\" data-target=\"#mymodal2\" data-keyboard=\"false\" data-backdrop=\"static\">Delete</button>", width: 30},
+		    		 {"defaultContent": "<button  class=\"select edit-btn\" data-toggle=\"modal\" data-target=\"#mymodal1\" data-keyboard=\"false\" data-backdrop=\"static\">Edit</button>", width: 30},
   					 {"data": "ageGroup", width:70},
 		     		 {"data":"description", width:80},
 					 {"data": "recommendedFor", width:70},
 		     		 {"data":"gender", width:10},
-					 {"data": "bodyPart", width:30},
-		     		 {"data":"condition", width:30}
+					 {"data": "fromAge", width:30},
+		     		 {"data":"toAge", width:30}
 		   ]
         });
 var table = $('#doctorlist').DataTable();
 
-$('#doctorlist tbody').on( 'click', 'tr', function () {
-	if ($(this).index() == 4 ) { // provide index of your column in which you prevent row click here is column of 4 index
-        return;
-    }
+$('#doctorlist tbody').on( 'click', '.edit-btn', function () {
+//if ($(this).index() == 5 ) { // provide index of your column in which you prevent row click here is column of 4 index
+       // return;
+  // }
 	$("#testName").empty();
-	var hiddendata=tables.row(this).data()[0];
-	
+	//var hiddendata=tables.row(this).data()[0];
+     //console.log(tables.row(this).data());
 	 var data=$(this).text();
-	 packageid = $('td', this).eq(0).text();
-	 packagename=$('td', this).eq(1).text();
-	 var testName=$('td', this).eq(2).text();
-	 frequency=$('td', this).eq(3).text();
-	 agegroup=$('td', this).eq(6).text();
-	 description=$('td', this).eq(7).text();
-	 recommenedfor=$('td', this).eq(8).text();
-	 genderClick=$('td', this).eq(9).text();
-	 bodyPart=$('td', this).eq(10).text();
-	 clinicalCondition=$('td', this).eq(11).text();
- 	
+	 var tr =$(this).parent().parent();
+	 packageid = tr.children("td:nth-child(1)").text();
+	// alert(packageid);
+	 packagename=tr.children("td:nth-child(2)").text();
+	 var testName=tr.children("td:nth-child(3)").text();
+	 frequency=tr.children("td:nth-child(4)").text();
+	 agegroup=tr.children("td:nth-child(7)").text();
+	 description=tr.children("td:nth-child(8)").text();
+	 recommenedfor=tr.children("td:nth-child(9)").text();
+	 genderClick=tr.children("td:nth-child(10)").text();
+	 fromAge=tr.children("td:nth-child(11)").text();
+	 toAge=tr.children("td:nth-child(12)").text();
+	 
  	$.ajax({
         url: URL + "/HealthCheckApp/apollo/test/list",
         type: "GET",
@@ -337,13 +337,12 @@ $('#doctorlist tbody').on( 'click', 'tr', function () {
 	    
         success: function (data) {
             var finalRes1=data.orderedParList;
-           	
             var select = document.getElementById("testName");
-			
+            
             for(var i=0;i< data.length; i++) {
 				id = data[i].testId;
 				name = data[i].testName;
-                select.options[select.options.length]=new Option(name,name);     
+                select.options[select.options.length]=new Option(name,name);    
 			}
                 
                 $('#testName').multiselect({
@@ -377,10 +376,11 @@ $('#doctorlist tbody').on( 'click', 'tr', function () {
     	document.getElementById('genderChoice2').checked = true;
     } else if (genderClick === "both") {
     	document.getElementById('genderChoice3').checked = true;
-    } 	
-    document.getElementById('bodyPart').value=bodyPart;
-    document.getElementById('clinicalCondi').value=clinicalCondition;
-
+    } 
+   //document.getElementById('bodyPart').value=bodyPart;
+   //document.getElementById('clinicalCondi').value=clinicalCondition;
+   document.getElementById('fromAge').value=fromAge;
+   document.getElementById('toAge').value=toAge;
 });
 $('#update').click( function (e) {
 	
@@ -402,27 +402,32 @@ $('#update').click( function (e) {
 				}
 			});
 		}
-	  
+	  var fromAgeUp=$("#fromAge").val();
+	  var toAgeUp=$("#toAge").val();
 		  $.ajax({
 		      type: 'POST',
 		      url : URL +  "/HealthCheckApp/apollo/package/update",
-		      data : JSON.stringify({"packageId":packageid,"packageName":packagename,"description":packageDescription,"recommendedFor":packageRecommendedFor,"ageGroup":packageAgeGroup,"frequency":packageFrequency,"testNamesString":selectTestString,"gender":packageGender,"bodyPart":recommenBodyPart,"clinicalCondi":clinicalCondition}),
+		      data : JSON.stringify({"packageId":packageid,"packageName":packagename,"description":packageDescription,"recommendedFor":packageRecommendedFor,"ageGroup":packageAgeGroup,"frequency":packageFrequency,"testNamesString":selectTestString,"gender":packageGender,"bodyPart":recommenBodyPart,"clinicalCondi":clinicalCondition,"fromAge":fromAgeUp,"toAge":toAgeUp}),
 		      dataType : 'json',
 		      contentType: "application/json; charset=utf-8",
 		      success : function(data) {
+		    	  console.log(data);
 		    	  window.top.location=URL + "/HealthCheckApp/packageDetails"
 		      },
 		      error:function(){
 		    	  window.top.location=URL + "/HealthCheckApp/packageDetails";
 		      }
-		});
+		});	 
 });
 
 
 
-/* Delete */
-
+$(document).on("click",'.delete-btn',function (e) {
+ var tr =$(this).parent().parent();
+ packageid = tr.children("td:nth-child(1)").text();
+});
 		$('#delete').click( function (e) {
+			 
 		    $.ajax({
 		      type: 'POST',
 		      url : URL + "/HealthCheckApp/apollo/package/delete",
@@ -534,9 +539,20 @@ $('#update').click( function (e) {
 		Recommended For:&nbsp&nbsp
 		<textarea rows="3" cols="28" id="recommendedForAdd"></textarea>
 		
+	</div>
+	<br>
+	<br>
+	<div>
+	&nbsp&nbsp
+		From Age:&nbsp&nbsp
+		<input type="text" id="fromAgeAdd" style="height: 30px">
+		
+		&nbsp&nbsp
+		To Age:&nbsp&nbsp
+		<input type="text" id="toAgeAdd" style="height: 30px">
+		
 		&nbsp&nbsp
 		<input class="button" type="button" id="buttonAdd" value=" Add ">
-		
 	</div>
 	
 	<br>
@@ -560,8 +576,8 @@ $('#update').click( function (e) {
 						<th>Description</th>
 						<th>Recommended For</th>
 						<th>Gender</th>
-						<th>Body Part</th>
-						<th>Clinical Condition</th>	
+						<th>From Age</th>
+						<th>To Age</th>	
 					</tr>
 				</thead>
 	
@@ -656,6 +672,16 @@ $('#update').click( function (e) {
                     <tr class="table-style">
                       <td>Clinical Condition:</td>
                       <td><input type="text" id="clinicalCondi" name="clinicalCondi" autocomplete="off" style="width: 360px"></td>
+                    </tr>        
+                    
+                    <tr class="table-style">
+                      <td>From Age:</td>
+                      <td><input type="text" id="fromAge" name="fromAge" autocomplete="off" style="width: 360px"></td>
+                    </tr>   
+                    
+                    <tr class="table-style">
+                      <td>To Age:</td>
+                      <td><input type="text" id="toAge" name="toAge" autocomplete="off" style="width: 360px"></td>
                     </tr>                    
                     
                   </tbody>

@@ -47,7 +47,10 @@ public class PackageServiceImpl implements PackageService{
 				hcPackage.setGender(packag[7]  == null ? "" : (String) packag[7]);
 				hcPackage.setBodyPart(packag[8]  == null ? "" : (String) packag[8]);
 				hcPackage.setClinicalCondi(packag[9]  == null ? "" : (String) packag[9]);
+				hcPackage.setFromAge(packag[10]==null ? "" : String.valueOf(packag[10]));
+				hcPackage.setToAge(packag[11]==null ? "" : String.valueOf(packag[11]));
 				packageList.add(hcPackage);
+				System.out.println();
 			}
 			
 		} catch(Exception e) {

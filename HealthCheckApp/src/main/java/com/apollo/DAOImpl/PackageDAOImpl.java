@@ -63,7 +63,7 @@ public class PackageDAOImpl implements PackageDAO {
 			logger.info("Package add DAO called");
 			tx = session.beginTransaction();
 			
-			Query packageAddQuery = session.createSQLQuery("CALL " + "hc_ins_package(?, ?, ?, ?, ?, ?, ?, ? ,?)");
+			Query packageAddQuery = session.createSQLQuery("CALL " + "hc_ins_package(?, ?, ?, ?, ?, ?, ?, ? ,?,?,?)");
 			packageAddQuery.setString(0, packag.getPackageName());
 			packageAddQuery.setString(1, packag.getFrequency());
 			packageAddQuery.setString(2, packag.getAgeGroup());
@@ -73,9 +73,10 @@ public class PackageDAOImpl implements PackageDAO {
 			packageAddQuery.setString(6, packag.getGender());
 			packageAddQuery.setString(7, packag.getBodyPart());
 			packageAddQuery.setString(8, packag.getClinicalCondi());
+			packageAddQuery.setString(9, packag.getFromAge());
+			packageAddQuery.setString(10, packag.getToAge());
 			response = (String) packageAddQuery.uniqueResult();
 			tx.commit();
-			
 		} catch (Exception e) {
 			logger.info("Package add DAO called: Exception: " + e.getStackTrace());
 			e.printStackTrace();
@@ -102,7 +103,7 @@ public class PackageDAOImpl implements PackageDAO {
 			logger.info("Package update DAO called");
 			tx = session.beginTransaction();
 			
-			Query packageUpdateQuery = session.createSQLQuery("CALL " + "hc_update_package(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			Query packageUpdateQuery = session.createSQLQuery("CALL " + "hc_update_package(?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)");
 			packageUpdateQuery.setInteger(0, packag.getPackageId());
 			packageUpdateQuery.setString(1, packag.getPackageName());
 			packageUpdateQuery.setString(2, packag.getFrequency());
@@ -113,8 +114,9 @@ public class PackageDAOImpl implements PackageDAO {
 			packageUpdateQuery.setString(7, packag.getGender());
 			packageUpdateQuery.setString(8, packag.getBodyPart());
 			packageUpdateQuery.setString(9, packag.getClinicalCondi());
+			packageUpdateQuery.setString(10, packag.getFromAge());
+			packageUpdateQuery.setString(11, packag.getToAge());
 			response = (String) packageUpdateQuery.uniqueResult();
-			
 			tx.commit();
 			
 		} catch (Exception e) {

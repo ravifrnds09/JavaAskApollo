@@ -28,7 +28,7 @@ public class PackageController {
 	HCPackageResponse hcPackageResponse;
 		
 	@GET
-	@Path("/list")
+	@Path("/list1")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<HCPackage> packageList() {
 		

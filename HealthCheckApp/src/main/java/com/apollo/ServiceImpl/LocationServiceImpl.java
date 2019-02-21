@@ -61,6 +61,8 @@ public class LocationServiceImpl implements LocationService {
 				packTest = new HospitalList();
 				packTest.setHospitalId(Integer.parseInt(object[0].toString()));
 				packTest.setHospitalName(object[1].toString());
+				packTest.setUnit_ID(object[2].toString());
+				packTest.setPayment_Availability(object[3].toString());
 				list.add(packTest);
 				logger.info("Get Hospitals Locations Service Response is "+packTest.toString());
 			}
