@@ -1,5 +1,7 @@
 package com.apollo.model;
 
+import java.math.BigInteger;
+
 public class HCPackage {
 	
 	private int packageId;
@@ -27,6 +29,10 @@ public class HCPackage {
 	private int ageId;
 	
 	private int locationId;
+	
+	private String fromAge;
+	
+	private String toAge;
 
 	public int getPackageId() {
 		return packageId;
@@ -131,6 +137,21 @@ public class HCPackage {
 	public void setLocationId(int locationId) {
 		this.locationId = locationId;
 	}
+	public String getFromAge() {
+		return fromAge;
+	}
+
+	public void setFromAge(String fromAge) {
+		this.fromAge = fromAge;
+	}
+
+	public String getToAge() {
+		return toAge;
+	}
+
+	public void setToAge(String toAge) {
+		this.toAge = toAge;
+	}
 
 	@Override
 	public String toString() {
@@ -138,8 +159,10 @@ public class HCPackage {
 				+ ", bodyPart=" + bodyPart + ", clinicalCondi=" + clinicalCondi + ", frequency=" + frequency
 				+ ", ageGroup=" + ageGroup + ", description=" + description + ", recommendedFor=" + recommendedFor
 				+ ", testNamesString=" + testNamesString + ", genderId=" + genderId + ", ageId=" + ageId
-				+ ", locationId=" + locationId + "]";
+				+ ", locationId=" + locationId + ", fromAge=" + fromAge + ", toAge=" + toAge + "]";
 	}
+
+	
 	
 			
 }

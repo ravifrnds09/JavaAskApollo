@@ -2,12 +2,14 @@ package com.apollo.DAOImpl;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.json.JSONObject;
 
 import com.apollo.DAO.PackageListDAO;
 import com.apollo.Util.HibernateUtil;
@@ -55,6 +57,7 @@ public class PackageListDAOImpl implements PackageListDAO {
 	public List getTestParameter(TestParameterDesc desc) {
 		logger.info("Get Packages DAO");
 		List list=null;
+		List paramList = new ArrayList();
 		try{
 			sessionFactory = HibernateUtil.getSessionFactory();
 			session=sessionFactory.openSession();

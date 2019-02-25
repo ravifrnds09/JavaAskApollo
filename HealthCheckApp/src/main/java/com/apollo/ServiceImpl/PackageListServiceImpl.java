@@ -1,6 +1,7 @@
 package com.apollo.ServiceImpl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -110,7 +111,7 @@ public class PackageListServiceImpl implements PackageListService {
 		String info = null;
 		TestParameterDesc testParameterDesc = null;
 		JSONObject json2 = null;
-		List testParam = new ArrayList();
+		JSONObject testParam = null;
 		try {
 			for (Object result : testlist) {
 				Object[] obj = (Object[]) result;
@@ -128,14 +129,14 @@ public class PackageListServiceImpl implements PackageListService {
 				packTest.setAge_Group_Recommended(obj[10].toString());
 				packTest.setRecommended_For(obj[11].toString());
 				String[] inclusion = packTest.getPackageinclusions().split(",");
+				testParam = new JSONObject();
 				for (int i = 0; i < inclusion.length; i++) {
-					/* packTest.setPackageinclusionsParametersAndDiscription(json2); */
 					testParameterDesc = new TestParameterDesc();
 					testParameterDesc.setPackageName(inclusion[i]);
 					packageListServiceImpl = new PackageListServiceImpl();
 					info = packageListServiceImpl.getTestParameter(testParameterDesc);
 					json2 = new JSONObject(info);
-					testParam.add(json2);
+					testParam.put(inclusion[i], json2.getJSONArray(inclusion[i]));
 				}
 				packTest.setPackageinclusionsParametersAndDiscription(testParam);
 				list.add(packTest);
@@ -153,5 +154,6 @@ public class PackageListServiceImpl implements PackageListService {
 		}
 		return obj.toString();
 	}
+	
 
 }
