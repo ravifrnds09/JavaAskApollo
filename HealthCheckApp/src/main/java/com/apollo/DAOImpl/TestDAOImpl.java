@@ -60,10 +60,11 @@ public class TestDAOImpl implements TestDAO {
 		try {
 			logger.info("Test add DAO called");
 			
-			Query testAddQrery = session.createSQLQuery("CALL " + "hc_ins_test(?, ?, ?)");
+			Query testAddQrery = session.createSQLQuery("CALL " + "hc_ins_test(?, ?, ?,?)");
 			testAddQrery.setString(0, test.getTestName());
 			testAddQrery.setString(1, test.getParamNamesString().equals("")  ? null : test.getParamNamesString());
 			testAddQrery.setString(2, test.getTestDesc());
+			testAddQrery.setString(3, test.getDisplayName());
 			response = (String) testAddQrery.uniqueResult();
 			logger.info("Test add DAO called: Response : " + response);		
 			tx.commit();
@@ -95,11 +96,12 @@ public class TestDAOImpl implements TestDAO {
 		try {
 			logger.info("Test update DAO called");
 			tx = session.beginTransaction();
-			Query testUpdateQrery = session.createSQLQuery("CALL " + "hc_update_test(?, ?, ?, ?)");
+			Query testUpdateQrery = session.createSQLQuery("CALL " + "hc_update_test(?, ?, ?, ?,?)");
 			testUpdateQrery.setInteger(0, test.getTestId());
 			testUpdateQrery.setString(1, test.getTestName());
 			testUpdateQrery.setString(2, test.getTestDesc());
 			testUpdateQrery.setString(3, test.getParamNamesString());
+			testUpdateQrery.setString(4, test.getDisplayName());
 			response = (String) testUpdateQrery.uniqueResult();
 			logger.info("Test update DAO called: : " + response);
 			tx.commit();

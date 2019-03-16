@@ -4,8 +4,6 @@ import java.math.BigInteger;
 
 public class HCPackageMappingComplete {
 	
-	
-
 	private BigInteger serviceId;
 	
 	private String serviceName;

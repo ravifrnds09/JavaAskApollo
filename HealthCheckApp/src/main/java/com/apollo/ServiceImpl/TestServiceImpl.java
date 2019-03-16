@@ -40,7 +40,7 @@ public class TestServiceImpl implements TestService{
 				hcTest.setTestName(testObject[1] == null ? "" : (String) testObject[1]);
 				hcTest.setTestDesc(testObject[3] == null ? "" : (String) testObject[3]);
 				hcTest.setParamNamesString(testObject[2] == null ? "" : (String) testObject[2]);
-				
+				hcTest.setDisplayName(testObject[4] == null ? "" : (String) testObject[4]);
 				testList.add(hcTest);
 				logger.info("Test list is "+hcTest.toString());
 			}

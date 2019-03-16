@@ -7,12 +7,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
-import org.json.JSONObject;
 
 import com.apollo.Service.PackageListService;
 import com.apollo.ServiceImpl.PackageListServiceImpl;
 import com.apollo.model.PackageList;
 import com.apollo.model.PackageListV2;
+import com.apollo.model.PackageListV3;
 import com.apollo.model.TestParameterDesc;
 
 @Path("/package")
@@ -57,6 +57,21 @@ public class PackageListController {
 		try {
 			service = new PackageListServiceImpl();
 			response = service.getTestParameter(testParameterDesc);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return response;
+	}
+	@POST
+	@Path("/listV3")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getTestActualName(PackageListV3 packageList) {
+		String response = "fail";
+		logger.info("Package ListV2   Controller is called");
+		try {
+			service = new PackageListServiceImpl();
+			response = service.getActualNames(packageList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

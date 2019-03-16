@@ -33,6 +33,8 @@ public class HCPackage {
 	private String fromAge;
 	
 	private String toAge;
+	
+	private String displayName;
 
 	public int getPackageId() {
 		return packageId;
@@ -153,15 +155,25 @@ public class HCPackage {
 		this.toAge = toAge;
 	}
 
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
+
 	@Override
 	public String toString() {
 		return "HCPackage [packageId=" + packageId + ", packageName=" + packageName + ", gender=" + gender
 				+ ", bodyPart=" + bodyPart + ", clinicalCondi=" + clinicalCondi + ", frequency=" + frequency
 				+ ", ageGroup=" + ageGroup + ", description=" + description + ", recommendedFor=" + recommendedFor
 				+ ", testNamesString=" + testNamesString + ", genderId=" + genderId + ", ageId=" + ageId
-				+ ", locationId=" + locationId + ", fromAge=" + fromAge + ", toAge=" + toAge + "]";
+				+ ", locationId=" + locationId + ", fromAge=" + fromAge + ", toAge=" + toAge + ", displayName="
+				+ displayName + "]";
 	}
 
+	
 	
 	
 			

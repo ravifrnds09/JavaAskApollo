@@ -49,6 +49,7 @@ public class PackageServiceImpl implements PackageService{
 				hcPackage.setClinicalCondi(packag[9]  == null ? "" : (String) packag[9]);
 				hcPackage.setFromAge(packag[10]==null ? "" : String.valueOf(packag[10]));
 				hcPackage.setToAge(packag[11]==null ? "" : String.valueOf(packag[11]));
+				hcPackage.setDisplayName(packag[12]==null ? "" : String.valueOf(packag[12]));
 				packageList.add(hcPackage);
 				System.out.println();
 			}

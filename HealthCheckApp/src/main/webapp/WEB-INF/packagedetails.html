@@ -236,6 +236,7 @@ $(document).ready(function() {
 			}
 		  var fromAgeAdd=$("#fromAgeAdd").val();
 		  var toAgeAdd=$("#toAgeAdd").val();
+		  var displayNameAdd=$("#displayNameAdd").val();
 		  	if ($.trim(packageNameAdd).length == 0 || packageNameAdd == "") {
 		        alert("Please Enter Package Name");
 		        return false;
@@ -243,7 +244,7 @@ $(document).ready(function() {
 				  $.ajax({
 				      type: 'POST',
 				      url : URL +  "/HealthCheckApp/apollo/package/add",
-				      data : JSON.stringify({"packageName":packageNameAdd,"description":descriptionAdd,"recommendedFor":recommendedForAdd,"ageGroup":ageGroupAdd,"frequency":frequencyAdd,"testNamesString":selectTestString,"gender":genderAdd,"bodyPart":recommenBodyPartAdd,"clinicalCondi":clinicalConditionAdd,"fromAge":fromAgeAdd,"toAge":toAgeAdd}),
+				      data : JSON.stringify({"packageName":packageNameAdd,"description":descriptionAdd,"recommendedFor":recommendedForAdd,"ageGroup":ageGroupAdd,"frequency":frequencyAdd,"testNamesString":selectTestString,"gender":genderAdd,"bodyPart":recommenBodyPartAdd,"clinicalCondi":clinicalConditionAdd,"fromAge":fromAgeAdd,"toAge":toAgeAdd,"displayName":displayNameAdd}),
 				      dataType : 'json',
 				      contentType: "application/json; charset=utf-8",
 				      success : function(data) {
@@ -287,7 +288,8 @@ $(document).ready(function() {
 	                'bodyPart' : json[i].bodyPart,
 	                'condition' : json[i].clinicalCondi,
 	                'fromAge':json[i].fromAge,
-	                'toAge':json[i].toAge
+	                'toAge':json[i].toAge,
+	                'displayName':json[i].displayName
 	              })
 	            }
 	            return return_data;
@@ -304,7 +306,8 @@ $(document).ready(function() {
 					 {"data": "recommendedFor", width:70},
 		     		 {"data":"gender", width:10},
 					 {"data": "fromAge", width:30},
-		     		 {"data":"toAge", width:30}
+		     		 {"data":"toAge", width:30},
+					 {"data":"displayName", width:30}
 		   ]
         });
 var table = $('#doctorlist').DataTable();
@@ -329,6 +332,7 @@ $('#doctorlist tbody').on( 'click', '.edit-btn', function () {
 	 genderClick=tr.children("td:nth-child(10)").text();
 	 fromAge=tr.children("td:nth-child(11)").text();
 	 toAge=tr.children("td:nth-child(12)").text();
+	 displayName=tr.children("td:nth-child(13)").text();
 	 
  	$.ajax({
         url: URL + "/HealthCheckApp/apollo/test/list",
@@ -381,6 +385,7 @@ $('#doctorlist tbody').on( 'click', '.edit-btn', function () {
    //document.getElementById('clinicalCondi').value=clinicalCondition;
    document.getElementById('fromAge').value=fromAge;
    document.getElementById('toAge').value=toAge;
+   document.getElementById('displayName').value=displayName;
 });
 $('#update').click( function (e) {
 	
@@ -404,10 +409,11 @@ $('#update').click( function (e) {
 		}
 	  var fromAgeUp=$("#fromAge").val();
 	  var toAgeUp=$("#toAge").val();
+	  var displayNameUp =$("#displayName").val();
 		  $.ajax({
 		      type: 'POST',
 		      url : URL +  "/HealthCheckApp/apollo/package/update",
-		      data : JSON.stringify({"packageId":packageid,"packageName":packagename,"description":packageDescription,"recommendedFor":packageRecommendedFor,"ageGroup":packageAgeGroup,"frequency":packageFrequency,"testNamesString":selectTestString,"gender":packageGender,"bodyPart":recommenBodyPart,"clinicalCondi":clinicalCondition,"fromAge":fromAgeUp,"toAge":toAgeUp}),
+		      data : JSON.stringify({"packageId":packageid,"packageName":packagename,"description":packageDescription,"recommendedFor":packageRecommendedFor,"ageGroup":packageAgeGroup,"frequency":packageFrequency,"testNamesString":selectTestString,"gender":packageGender,"bodyPart":recommenBodyPart,"clinicalCondi":clinicalCondition,"fromAge":fromAgeUp,"toAge":toAgeUp,"displayName":displayNameUp}),
 		      dataType : 'json',
 		      contentType: "application/json; charset=utf-8",
 		      success : function(data) {
@@ -552,6 +558,10 @@ $(document).on("click",'.delete-btn',function (e) {
 		<input type="text" id="toAgeAdd" style="height: 30px">
 		
 		&nbsp&nbsp
+		DisplayName:&nbsp&nbsp
+		<input type="text" id="displayNameAdd" style="height: 30px">
+		
+		&nbsp&nbsp
 		<input class="button" type="button" id="buttonAdd" value=" Add ">
 	</div>
 	
@@ -577,7 +587,8 @@ $(document).on("click",'.delete-btn',function (e) {
 						<th>Recommended For</th>
 						<th>Gender</th>
 						<th>From Age</th>
-						<th>To Age</th>	
+						<th>To Age</th>
+						<th>DisplayName</th>	
 					</tr>
 				</thead>
 	
@@ -682,6 +693,10 @@ $(document).on("click",'.delete-btn',function (e) {
                     <tr class="table-style">
                       <td>To Age:</td>
                       <td><input type="text" id="toAge" name="toAge" autocomplete="off" style="width: 360px"></td>
+                    </tr> 
+                    <tr class="table-style">
+                      <td>DisplayName</td>
+                      <td><input type="text" id="displayName" name="displayName" autocomplete="off" style="width: 360px"></td>
                     </tr>                    
                     
                   </tbody>
