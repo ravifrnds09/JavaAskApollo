@@ -106,7 +106,7 @@ public class PackageMappingServiceImpl implements PackageMappingService{
 				hcPackageMapping = new HCPackageMapping();
 				
 				hcPackageMapping.setPackageId((int) object[0]);
-				hcPackageMapping.setPackageName((String) object[1]);
+				hcPackageMapping.setPackageName((String) object[1]==null ? "":(String) object[1]);
 				hcPackageMapping.setServiceNamesString((String) object[2]);		
 				hcPackageMapping.setSubPackagesString((String) object[3]);
 				hcPackageMapping.setLocationId((Integer) object[4]);

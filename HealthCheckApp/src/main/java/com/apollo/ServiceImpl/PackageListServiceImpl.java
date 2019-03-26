@@ -2,8 +2,11 @@ package com.apollo.ServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.log4j.Logger;
+import org.json.JSONException;
 import org.json.JSONObject;
+
 import com.apollo.DAO.PackageListDAO;
 import com.apollo.DAOImpl.PackageListDAOImpl;
 import com.apollo.Service.PackageListService;
@@ -74,7 +77,7 @@ public class PackageListServiceImpl implements PackageListService {
 				Object[] obj = (Object[]) result;
 				descList = new TestParameterDesc();
 				descList.setParameter(obj[0].toString() != null ? obj[0].toString() : "");
-				descList.setDescription(obj[1].toString().equals("NA") ? "" :obj[1].toString() );
+				descList.setDescription(obj[1].toString().equals("NA") ? "" : obj[1].toString());
 				list.add(descList);
 				JSONObject addrObj = new JSONObject();
 				addrObj.put("parameter", descList.getParameter());
@@ -132,7 +135,6 @@ public class PackageListServiceImpl implements PackageListService {
 					info = packageListServiceImpl.getTestParameter(testParameterDesc);
 					json2 = new JSONObject(info);
 					testParam.put(inclusion[i], json2.getJSONArray(inclusion[i]));
-					System.out.println(inclusion[i]);
 				}
 				packTest.setPackageinclusionsParametersAndDiscription(testParam);
 				list.add(packTest);
@@ -186,11 +188,12 @@ public class PackageListServiceImpl implements PackageListService {
 				testParam = new JSONObject();
 				for (int i = 0; i < inclusion.length; i++) {
 					testParameterDesc = new TestParameterDesc();
-					testParameterDesc.setPackageName(inclusion1[i]);
+					testParameterDesc.setPackageName(inclusion1[i].replaceAll("\n", ""));
 					packageListServiceImpl = new PackageListServiceImpl();
 					info = packageListServiceImpl.getTestParameter(testParameterDesc);
 					json2 = new JSONObject(info);
 					testParam.put(inclusion[i], json2.getJSONArray(inclusion1[i]));
+
 				}
 				packTest.setPackageinclusionsParametersAndDiscription(testParam);
 				list.add(packTest);
@@ -208,6 +211,7 @@ public class PackageListServiceImpl implements PackageListService {
 		}
 		return obj.toString();
 	}
+
 	
 
 }

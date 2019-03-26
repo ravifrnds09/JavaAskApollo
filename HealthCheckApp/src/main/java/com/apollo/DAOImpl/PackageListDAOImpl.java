@@ -36,7 +36,6 @@ public class PackageListDAOImpl implements PackageListDAO {
 			PackageQuery.setInteger(2, pack.getAge());
 			PackageQuery.setString(3, pack.getGender());
 			list = PackageQuery.list();
-			list = PackageQuery.list();
 
 		} catch (Exception e) {
 			logger.info("Package Registration DAO called: Exception: " + e.getStackTrace());
@@ -64,6 +63,7 @@ public class PackageListDAOImpl implements PackageListDAO {
 			PackageQuery.setString(0, desc.getPackageName());
 			list = PackageQuery.list();
 		} catch (Exception e) {
+
 			logger.info("Package Registration DAO called: Exception: " + e.getStackTrace());
 			e.printStackTrace();
 		} finally {
@@ -90,7 +90,6 @@ public class PackageListDAOImpl implements PackageListDAO {
 			PackageQuery.setInteger(1, packageList.getHospitalId());
 			PackageQuery.setInteger(2, packageList.getAge());
 			PackageQuery.setString(3, packageList.getGender());
-			list = PackageQuery.list();
 			list = PackageQuery.list();
 		} catch (Exception e) {
 			logger.info("Package Registration DAO called: Exception: " + e.getStackTrace());
@@ -119,7 +118,6 @@ public class PackageListDAOImpl implements PackageListDAO {
 			PackageQuery.setInteger(1, packageListV3.getHospitalId());
 			PackageQuery.setInteger(2, packageListV3.getAge());
 			PackageQuery.setString(3, packageListV3.getGender());
-			list = PackageQuery.list();
 			list = PackageQuery.list();
 		} catch (Exception e) {
 			logger.info("Package Registration DAO called: Exception: " + e.getStackTrace());

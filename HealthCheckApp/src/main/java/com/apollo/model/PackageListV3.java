@@ -1,8 +1,5 @@
 package com.apollo.model;
 
-import java.util.List;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 
@@ -127,6 +124,7 @@ public class PackageListV3 {
 	public void setTestActualName(String testActualName) {
 		this.testActualName = testActualName;
 	}
+	
 	
 	
 }
