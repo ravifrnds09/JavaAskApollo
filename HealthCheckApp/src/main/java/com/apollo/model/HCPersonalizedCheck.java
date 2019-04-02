@@ -2,61 +2,99 @@ package com.apollo.model;
 
 import javax.xml.bind.annotation.XmlElement;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(value = Include.NON_NULL)
 public class HCPersonalizedCheck {
-	@XmlElement(name="EdocCityId")
+	@XmlElement(name = "EdocCityId")
 	private String cityId;
-	@XmlElement(name="HRAID")
+	@XmlElement(name = "HRAID")
 	private String hRAID;
-	@XmlElement(name="PatientId")
+	@XmlElement(name = "PatientId")
 	private String patientId;
-	@XmlElement(name="UHID")
+	@XmlElement(name = "UHID")
 	private String uHID;
-	@XmlElement(name="Firstname")
+	@XmlElement(name = "Firstname")
 	private String firstname;
-	@XmlElement(name="Lastname")
+	@XmlElement(name = "Lastname")
 	private String lastname;
-	@XmlElement(name="PhoneNo")
+	@XmlElement(name = "PhoneNo")
 	private String phoneNo;
-	@XmlElement(name="EmailId")
+	@XmlElement(name = "EmailId")
 	private String emailId;
-	@XmlElement(name="Age")
+	@XmlElement(name = "Age")
 	private String age;
-	@XmlElement(name="Gender")
+	@XmlElement(name = "Gender")
 	private String gender;
-	private String AreYouPregnant;
-	private String IsSmoker;
-	private String DescribeYourSleep;
-	private String DescribeYourStressAtHome;
-	private String DescribeYourStressAtWork;
-	private String DescribeYourEnergyLevel;
-	private String Diag_DiabetesmellitusProblems;
-	private String Diag_BorderlineDiabetesProblems;
-	private String Diag_HighBloodPressureProblems;
-	private String Diag_HighCholesterolProblems;
-	private String Diag_HeartrelatedProblems;
-	private String Diag_AsthamaProblems;
-	private String Diag_ThyroidProblems;
-	private String Diag_HighUricAcidLevelProblems;
-	private String Diag_CancerProblems;
-	private String Diag_LiverProblems;
-	private String Diag_KidneyProblems;
-	private String Diag_OsteoporosisProblems;
-	private String Diag_ArthritisProblems;
-	private String Diag_OtherProblems;
-	private String Diag_Cancer_Type_Bladder;
-	private String Diag_Cancer_Type_Blood;
-	private String Diag_Cancer_Type_Breast;
-	private String Diag_Cancer_Type_Colon;
-	private String Diag_Cancer_Type_Eye;
-	private String Diag_Cancer_Type_Ovarian;
-	private String Diag_Cancer_Type_Pancreas;
-	private String Diag_Cancer_Type_Pituitary;
-	private String Diag_Cancer_Type_Prostrate;
-	private String Diag_Cancer_Type_Skin;
-	private String Diag_Cancer_Type_Stomach;
-	private String Diag_Cancer_Type_Thyroid;
-	private String Diag_Cancer_Type_Others;
+	@XmlElement(name = "AreYouPregnant")
+	private String areYouPregnant;
+	@XmlElement(name = "IsSmoker")
+	private String isSmoker;
+	@XmlElement(name = "DescribeYourSleep")
+	private String describeYourSleep;
+	@XmlElement(name = "DescribeYourStressAtHome")
+	private String describeYourStressAtHome;
+	@XmlElement(name = "DescribeYourStressAtWork")
+	private String describeYourStressAtWork;
+	@XmlElement(name = "DescribeYourEnergyLevel")
+	private String describeYourEnergyLevel;
+	@XmlElement(name = "Diag_DiabetesmellitusProblems")
+	private String diag_DiabetesmellitusProblems;
+	@XmlElement(name = "Diag_BorderlineDiabetesProblems")
+	private String diag_BorderlineDiabetesProblems;
+	@XmlElement(name = "Diag_HighBloodPressureProblems")
+	private String diag_HighBloodPressureProblems;
+	@XmlElement(name = "Diag_HighCholesterolProblems")
+	private String diag_HighCholesterolProblems;
+	@XmlElement(name = "Diag_HeartrelatedProblems")
+	private String diag_HeartrelatedProblems;
+	@XmlElement(name = "Diag_AsthamaProblems")
+	private String diag_AsthamaProblems;
+	@XmlElement(name = "Diag_ThyroidProblems")
+	private String diag_ThyroidProblems;
+	@XmlElement(name = "Diag_HighUricAcidLevelProblems")
+	private String diag_HighUricAcidLevelProblems;
+	@XmlElement(name = "Diag_CancerProblems")
+	private String diag_CancerProblems;
+	@XmlElement(name = "Diag_LiverProblems")
+	private String diag_LiverProblems;
+	@XmlElement(name = "Diag_KidneyProblems")
+	private String diag_KidneyProblems;
+	@XmlElement(name = "Diag_OsteoporosisProblems")
+	private String diag_OsteoporosisProblems;
+	@XmlElement(name = "Diag_ArthritisProblems")
+	private String diag_ArthritisProblems;
+	@XmlElement(name = "Diag_OtherProblems")
+	private String diag_OtherProblems;
+	@XmlElement(name = "Diag_Cancer_Type_Bladder")
+	private String diag_Cancer_Type_Bladder;
+	@XmlElement(name = "Diag_Cancer_Type_Blood")
+	private String diag_Cancer_Type_Blood;
+	@XmlElement(name = "Diag_Cancer_Type_Breast")
+	private String diag_Cancer_Type_Breast;
+	@XmlElement(name = "Diag_Cancer_Type_Colon")
+	private String diag_Cancer_Type_Colon;
+	@XmlElement(name = "Diag_Cancer_Type_Eye")
+	private String diag_Cancer_Type_Eye;
+	@XmlElement(name = "Diag_Cancer_Type_Ovarian")
+	private String diag_Cancer_Type_Ovarian;
+	@XmlElement(name = "diag_Cancer_Type_Pancreas")
+	private String diag_Cancer_Type_Pancreas;
+	@XmlElement(name = "Diag_Cancer_Type_Pituitary")
+	private String diag_Cancer_Type_Pituitary;
+	@XmlElement(name = "Diag_Cancer_Type_Prostrate")
+	private String diag_Cancer_Type_Prostrate;
+	@XmlElement(name = "Diag_Cancer_Type_Skin")
+	private String diag_Cancer_Type_Skin;
+	@XmlElement(name = "Diag_Cancer_Type_Stomach")
+	private String diag_Cancer_Type_Stomach;
+	@XmlElement(name = "Diag_Cancer_Type_Thyroid")
+	private String diag_Cancer_Type_Thyroid;
+	@XmlElement(name = "Diag_Cancer_Type_Others")
+	private String diag_Cancer_Type_Others;
 	private String FH_Diabetes;
 	private String FH_Hypertension;
 	private String FH_ThyroidProblems;
@@ -169,14 +207,6 @@ public class HCPersonalizedCheck {
 	private String HC_Gynaecology_PCODORPCOS;
 	private String HC_Gynaecology_Infertility;
 
-	private String regionId;
-	private String hospitalId;
-	private String packageName;
-	private String packageInclusions;
-	private String RecommadedInclusions;
-	private String price;
-	private String tarrif;
-
 	public String getCityId() {
 		return cityId;
 	}
@@ -184,8 +214,6 @@ public class HCPersonalizedCheck {
 	public void setCityId(String cityId) {
 		this.cityId = cityId;
 	}
-
-	
 
 	public String gethRAID() {
 		return hRAID;
@@ -260,267 +288,267 @@ public class HCPersonalizedCheck {
 	}
 
 	public String getAreYouPregnant() {
-		return AreYouPregnant;
+		return areYouPregnant;
 	}
 
 	public void setAreYouPregnant(String areYouPregnant) {
-		AreYouPregnant = areYouPregnant;
+		this.areYouPregnant = areYouPregnant;
 	}
 
 	public String getIsSmoker() {
-		return IsSmoker;
+		return isSmoker;
 	}
 
 	public void setIsSmoker(String isSmoker) {
-		IsSmoker = isSmoker;
+		this.isSmoker = isSmoker;
 	}
 
 	public String getDescribeYourSleep() {
-		return DescribeYourSleep;
+		return describeYourSleep;
 	}
 
 	public void setDescribeYourSleep(String describeYourSleep) {
-		DescribeYourSleep = describeYourSleep;
+		this.describeYourSleep = describeYourSleep;
 	}
 
 	public String getDescribeYourStressAtHome() {
-		return DescribeYourStressAtHome;
+		return describeYourStressAtHome;
 	}
 
 	public void setDescribeYourStressAtHome(String describeYourStressAtHome) {
-		DescribeYourStressAtHome = describeYourStressAtHome;
+		this.describeYourStressAtHome = describeYourStressAtHome;
 	}
 
 	public String getDescribeYourStressAtWork() {
-		return DescribeYourStressAtWork;
+		return describeYourStressAtWork;
 	}
 
 	public void setDescribeYourStressAtWork(String describeYourStressAtWork) {
-		DescribeYourStressAtWork = describeYourStressAtWork;
+		this.describeYourStressAtWork = describeYourStressAtWork;
 	}
 
 	public String getDescribeYourEnergyLevel() {
-		return DescribeYourEnergyLevel;
+		return describeYourEnergyLevel;
 	}
 
 	public void setDescribeYourEnergyLevel(String describeYourEnergyLevel) {
-		DescribeYourEnergyLevel = describeYourEnergyLevel;
+		this.describeYourEnergyLevel = describeYourEnergyLevel;
 	}
 
 	public String getDiag_DiabetesmellitusProblems() {
-		return Diag_DiabetesmellitusProblems;
+		return diag_DiabetesmellitusProblems;
 	}
 
 	public void setDiag_DiabetesmellitusProblems(String diag_DiabetesmellitusProblems) {
-		Diag_DiabetesmellitusProblems = diag_DiabetesmellitusProblems;
+		this.diag_DiabetesmellitusProblems = diag_DiabetesmellitusProblems;
 	}
 
 	public String getDiag_BorderlineDiabetesProblems() {
-		return Diag_BorderlineDiabetesProblems;
+		return diag_BorderlineDiabetesProblems;
 	}
 
 	public void setDiag_BorderlineDiabetesProblems(String diag_BorderlineDiabetesProblems) {
-		Diag_BorderlineDiabetesProblems = diag_BorderlineDiabetesProblems;
+		this.diag_BorderlineDiabetesProblems = diag_BorderlineDiabetesProblems;
 	}
 
 	public String getDiag_HighBloodPressureProblems() {
-		return Diag_HighBloodPressureProblems;
+		return diag_HighBloodPressureProblems;
 	}
 
 	public void setDiag_HighBloodPressureProblems(String diag_HighBloodPressureProblems) {
-		Diag_HighBloodPressureProblems = diag_HighBloodPressureProblems;
+		this.diag_HighBloodPressureProblems = diag_HighBloodPressureProblems;
 	}
 
 	public String getDiag_HighCholesterolProblems() {
-		return Diag_HighCholesterolProblems;
+		return diag_HighCholesterolProblems;
 	}
 
 	public void setDiag_HighCholesterolProblems(String diag_HighCholesterolProblems) {
-		Diag_HighCholesterolProblems = diag_HighCholesterolProblems;
+		this.diag_HighCholesterolProblems = diag_HighCholesterolProblems;
 	}
 
 	public String getDiag_HeartrelatedProblems() {
-		return Diag_HeartrelatedProblems;
+		return diag_HeartrelatedProblems;
 	}
 
 	public void setDiag_HeartrelatedProblems(String diag_HeartrelatedProblems) {
-		Diag_HeartrelatedProblems = diag_HeartrelatedProblems;
+		this.diag_HeartrelatedProblems = diag_HeartrelatedProblems;
 	}
 
 	public String getDiag_AsthamaProblems() {
-		return Diag_AsthamaProblems;
+		return diag_AsthamaProblems;
 	}
 
 	public void setDiag_AsthamaProblems(String diag_AsthamaProblems) {
-		Diag_AsthamaProblems = diag_AsthamaProblems;
+		this.diag_AsthamaProblems = diag_AsthamaProblems;
 	}
 
 	public String getDiag_ThyroidProblems() {
-		return Diag_ThyroidProblems;
+		return diag_ThyroidProblems;
 	}
 
 	public void setDiag_ThyroidProblems(String diag_ThyroidProblems) {
-		Diag_ThyroidProblems = diag_ThyroidProblems;
+		this.diag_ThyroidProblems = diag_ThyroidProblems;
 	}
 
 	public String getDiag_HighUricAcidLevelProblems() {
-		return Diag_HighUricAcidLevelProblems;
+		return diag_HighUricAcidLevelProblems;
 	}
 
 	public void setDiag_HighUricAcidLevelProblems(String diag_HighUricAcidLevelProblems) {
-		Diag_HighUricAcidLevelProblems = diag_HighUricAcidLevelProblems;
+		this.diag_HighUricAcidLevelProblems = diag_HighUricAcidLevelProblems;
 	}
 
 	public String getDiag_CancerProblems() {
-		return Diag_CancerProblems;
+		return diag_CancerProblems;
 	}
 
 	public void setDiag_CancerProblems(String diag_CancerProblems) {
-		Diag_CancerProblems = diag_CancerProblems;
+		this.diag_CancerProblems = diag_CancerProblems;
 	}
 
 	public String getDiag_LiverProblems() {
-		return Diag_LiverProblems;
+		return diag_LiverProblems;
 	}
 
 	public void setDiag_LiverProblems(String diag_LiverProblems) {
-		Diag_LiverProblems = diag_LiverProblems;
+		this.diag_LiverProblems = diag_LiverProblems;
 	}
 
 	public String getDiag_KidneyProblems() {
-		return Diag_KidneyProblems;
+		return diag_KidneyProblems;
 	}
 
 	public void setDiag_KidneyProblems(String diag_KidneyProblems) {
-		Diag_KidneyProblems = diag_KidneyProblems;
+		this.diag_KidneyProblems = diag_KidneyProblems;
 	}
 
 	public String getDiag_OsteoporosisProblems() {
-		return Diag_OsteoporosisProblems;
+		return diag_OsteoporosisProblems;
 	}
 
 	public void setDiag_OsteoporosisProblems(String diag_OsteoporosisProblems) {
-		Diag_OsteoporosisProblems = diag_OsteoporosisProblems;
+		this.diag_OsteoporosisProblems = diag_OsteoporosisProblems;
 	}
 
 	public String getDiag_ArthritisProblems() {
-		return Diag_ArthritisProblems;
+		return diag_ArthritisProblems;
 	}
 
 	public void setDiag_ArthritisProblems(String diag_ArthritisProblems) {
-		Diag_ArthritisProblems = diag_ArthritisProblems;
+		this.diag_ArthritisProblems = diag_ArthritisProblems;
 	}
 
 	public String getDiag_OtherProblems() {
-		return Diag_OtherProblems;
+		return diag_OtherProblems;
 	}
 
 	public void setDiag_OtherProblems(String diag_OtherProblems) {
-		Diag_OtherProblems = diag_OtherProblems;
+		this.diag_OtherProblems = diag_OtherProblems;
 	}
 
 	public String getDiag_Cancer_Type_Bladder() {
-		return Diag_Cancer_Type_Bladder;
+		return diag_Cancer_Type_Bladder;
 	}
 
 	public void setDiag_Cancer_Type_Bladder(String diag_Cancer_Type_Bladder) {
-		Diag_Cancer_Type_Bladder = diag_Cancer_Type_Bladder;
+		this.diag_Cancer_Type_Bladder = diag_Cancer_Type_Bladder;
 	}
 
 	public String getDiag_Cancer_Type_Blood() {
-		return Diag_Cancer_Type_Blood;
+		return diag_Cancer_Type_Blood;
 	}
 
 	public void setDiag_Cancer_Type_Blood(String diag_Cancer_Type_Blood) {
-		Diag_Cancer_Type_Blood = diag_Cancer_Type_Blood;
+		this.diag_Cancer_Type_Blood = diag_Cancer_Type_Blood;
 	}
 
 	public String getDiag_Cancer_Type_Breast() {
-		return Diag_Cancer_Type_Breast;
+		return diag_Cancer_Type_Breast;
 	}
 
 	public void setDiag_Cancer_Type_Breast(String diag_Cancer_Type_Breast) {
-		Diag_Cancer_Type_Breast = diag_Cancer_Type_Breast;
+		this.diag_Cancer_Type_Breast = diag_Cancer_Type_Breast;
 	}
 
 	public String getDiag_Cancer_Type_Colon() {
-		return Diag_Cancer_Type_Colon;
+		return diag_Cancer_Type_Colon;
 	}
 
 	public void setDiag_Cancer_Type_Colon(String diag_Cancer_Type_Colon) {
-		Diag_Cancer_Type_Colon = diag_Cancer_Type_Colon;
+		this.diag_Cancer_Type_Colon = diag_Cancer_Type_Colon;
 	}
 
 	public String getDiag_Cancer_Type_Eye() {
-		return Diag_Cancer_Type_Eye;
+		return diag_Cancer_Type_Eye;
 	}
 
 	public void setDiag_Cancer_Type_Eye(String diag_Cancer_Type_Eye) {
-		Diag_Cancer_Type_Eye = diag_Cancer_Type_Eye;
+		this.diag_Cancer_Type_Eye = diag_Cancer_Type_Eye;
 	}
 
 	public String getDiag_Cancer_Type_Ovarian() {
-		return Diag_Cancer_Type_Ovarian;
+		return diag_Cancer_Type_Ovarian;
 	}
 
 	public void setDiag_Cancer_Type_Ovarian(String diag_Cancer_Type_Ovarian) {
-		Diag_Cancer_Type_Ovarian = diag_Cancer_Type_Ovarian;
+		this.diag_Cancer_Type_Ovarian = diag_Cancer_Type_Ovarian;
 	}
 
 	public String getDiag_Cancer_Type_Pancreas() {
-		return Diag_Cancer_Type_Pancreas;
+		return diag_Cancer_Type_Pancreas;
 	}
 
 	public void setDiag_Cancer_Type_Pancreas(String diag_Cancer_Type_Pancreas) {
-		Diag_Cancer_Type_Pancreas = diag_Cancer_Type_Pancreas;
+		this.diag_Cancer_Type_Pancreas = diag_Cancer_Type_Pancreas;
 	}
 
 	public String getDiag_Cancer_Type_Pituitary() {
-		return Diag_Cancer_Type_Pituitary;
+		return diag_Cancer_Type_Pituitary;
 	}
 
 	public void setDiag_Cancer_Type_Pituitary(String diag_Cancer_Type_Pituitary) {
-		Diag_Cancer_Type_Pituitary = diag_Cancer_Type_Pituitary;
+		this.diag_Cancer_Type_Pituitary = diag_Cancer_Type_Pituitary;
 	}
 
 	public String getDiag_Cancer_Type_Prostrate() {
-		return Diag_Cancer_Type_Prostrate;
+		return diag_Cancer_Type_Prostrate;
 	}
 
 	public void setDiag_Cancer_Type_Prostrate(String diag_Cancer_Type_Prostrate) {
-		Diag_Cancer_Type_Prostrate = diag_Cancer_Type_Prostrate;
+		this.diag_Cancer_Type_Prostrate = diag_Cancer_Type_Prostrate;
 	}
 
 	public String getDiag_Cancer_Type_Skin() {
-		return Diag_Cancer_Type_Skin;
+		return diag_Cancer_Type_Skin;
 	}
 
 	public void setDiag_Cancer_Type_Skin(String diag_Cancer_Type_Skin) {
-		Diag_Cancer_Type_Skin = diag_Cancer_Type_Skin;
+		this.diag_Cancer_Type_Skin = diag_Cancer_Type_Skin;
 	}
 
 	public String getDiag_Cancer_Type_Stomach() {
-		return Diag_Cancer_Type_Stomach;
+		return diag_Cancer_Type_Stomach;
 	}
 
 	public void setDiag_Cancer_Type_Stomach(String diag_Cancer_Type_Stomach) {
-		Diag_Cancer_Type_Stomach = diag_Cancer_Type_Stomach;
+		this.diag_Cancer_Type_Stomach = diag_Cancer_Type_Stomach;
 	}
 
 	public String getDiag_Cancer_Type_Thyroid() {
-		return Diag_Cancer_Type_Thyroid;
+		return diag_Cancer_Type_Thyroid;
 	}
 
 	public void setDiag_Cancer_Type_Thyroid(String diag_Cancer_Type_Thyroid) {
-		Diag_Cancer_Type_Thyroid = diag_Cancer_Type_Thyroid;
+		this.diag_Cancer_Type_Thyroid = diag_Cancer_Type_Thyroid;
 	}
 
 	public String getDiag_Cancer_Type_Others() {
-		return Diag_Cancer_Type_Others;
+		return diag_Cancer_Type_Others;
 	}
 
 	public void setDiag_Cancer_Type_Others(String diag_Cancer_Type_Others) {
-		Diag_Cancer_Type_Others = diag_Cancer_Type_Others;
+		this.diag_Cancer_Type_Others = diag_Cancer_Type_Others;
 	}
 
 	public String getFH_Diabetes() {
@@ -1419,88 +1447,32 @@ public class HCPersonalizedCheck {
 		HC_Gynaecology_Infertility = hC_Gynaecology_Infertility;
 	}
 
-	public String getRegionId() {
-		return regionId;
-	}
-
-	public void setRegionId(String regionId) {
-		this.regionId = regionId;
-	}
-
-	public String getHospitalId() {
-		return hospitalId;
-	}
-
-	public void setHospitalId(String hospitalId) {
-		this.hospitalId = hospitalId;
-	}
-
-	public String getPackageName() {
-		return packageName;
-	}
-
-	public void setPackageName(String packageName) {
-		this.packageName = packageName;
-	}
-
-	public String getPackageInclusions() {
-		return packageInclusions;
-	}
-
-	public void setPackageInclusions(String packageInclusions) {
-		this.packageInclusions = packageInclusions;
-	}
-
-	public String getRecommadedInclusions() {
-		return RecommadedInclusions;
-	}
-
-	public void setRecommadedInclusions(String recommadedInclusions) {
-		RecommadedInclusions = recommadedInclusions;
-	}
-
-	public String getPrice() {
-		return price;
-	}
-
-	public void setPrice(String price) {
-		this.price = price;
-	}
-
-	public String getTarrif() {
-		return tarrif;
-	}
-
-	public void setTarrif(String tarrif) {
-		this.tarrif = tarrif;
-	}
-
 	@Override
 	public String toString() {
-		return "HCPersonalizedCheck [cityId=" + cityId + ", hRAID=" + hRAID + ", patientId=" + patientId + ", uHID="
-				+ uHID + ", firstname=" + firstname + ", lastname=" + lastname + ", phoneNo=" + phoneNo + ", emailId="
-				+ emailId + ", age=" + age + ", gender=" + gender + ", AreYouPregnant=" + AreYouPregnant + ", IsSmoker="
-				+ IsSmoker + ", DescribeYourSleep=" + DescribeYourSleep + ", DescribeYourStressAtHome="
-				+ DescribeYourStressAtHome + ", DescribeYourStressAtWork=" + DescribeYourStressAtWork
-				+ ", DescribeYourEnergyLevel=" + DescribeYourEnergyLevel + ", Diag_DiabetesmellitusProblems="
-				+ Diag_DiabetesmellitusProblems + ", Diag_BorderlineDiabetesProblems=" + Diag_BorderlineDiabetesProblems
-				+ ", Diag_HighBloodPressureProblems=" + Diag_HighBloodPressureProblems
-				+ ", Diag_HighCholesterolProblems=" + Diag_HighCholesterolProblems + ", Diag_HeartrelatedProblems="
-				+ Diag_HeartrelatedProblems + ", Diag_AsthamaProblems=" + Diag_AsthamaProblems
-				+ ", Diag_ThyroidProblems=" + Diag_ThyroidProblems + ", Diag_HighUricAcidLevelProblems="
-				+ Diag_HighUricAcidLevelProblems + ", Diag_CancerProblems=" + Diag_CancerProblems
-				+ ", Diag_LiverProblems=" + Diag_LiverProblems + ", Diag_KidneyProblems=" + Diag_KidneyProblems
-				+ ", Diag_OsteoporosisProblems=" + Diag_OsteoporosisProblems + ", Diag_ArthritisProblems="
-				+ Diag_ArthritisProblems + ", Diag_OtherProblems=" + Diag_OtherProblems + ", Diag_Cancer_Type_Bladder="
-				+ Diag_Cancer_Type_Bladder + ", Diag_Cancer_Type_Blood=" + Diag_Cancer_Type_Blood
-				+ ", Diag_Cancer_Type_Breast=" + Diag_Cancer_Type_Breast + ", Diag_Cancer_Type_Colon="
-				+ Diag_Cancer_Type_Colon + ", Diag_Cancer_Type_Eye=" + Diag_Cancer_Type_Eye
-				+ ", Diag_Cancer_Type_Ovarian=" + Diag_Cancer_Type_Ovarian + ", Diag_Cancer_Type_Pancreas="
-				+ Diag_Cancer_Type_Pancreas + ", Diag_Cancer_Type_Pituitary=" + Diag_Cancer_Type_Pituitary
-				+ ", Diag_Cancer_Type_Prostrate=" + Diag_Cancer_Type_Prostrate + ", Diag_Cancer_Type_Skin="
-				+ Diag_Cancer_Type_Skin + ", Diag_Cancer_Type_Stomach=" + Diag_Cancer_Type_Stomach
-				+ ", Diag_Cancer_Type_Thyroid=" + Diag_Cancer_Type_Thyroid + ", Diag_Cancer_Type_Others="
-				+ Diag_Cancer_Type_Others + ", FH_Diabetes=" + FH_Diabetes + ", FH_Hypertension=" + FH_Hypertension
+		return "HCPersonalizedCheck [EdocCityId=" + cityId + ", HRAID=" + hRAID + ", PatientId=" + patientId + ", UHID="
+				+ uHID + ", Firstname=" + firstname + ", Lastname=" + lastname + ", PhoneNo=" + phoneNo + ", EmailId="
+				+ emailId + ", Age=" + age + ", Gender=" + gender + ", AreYouPregnant=" + areYouPregnant + ", IsSmoker="
+				+ isSmoker + ", describeYourSleep=" + describeYourSleep + ", describeYourStressAtHome="
+				+ describeYourStressAtHome + ", describeYourStressAtWork=" + describeYourStressAtWork
+				+ ", describeYourEnergyLevel=" + describeYourEnergyLevel + ", diag_DiabetesmellitusProblems="
+				+ diag_DiabetesmellitusProblems + ", diag_BorderlineDiabetesProblems=" + diag_BorderlineDiabetesProblems
+				+ ", diag_HighBloodPressureProblems=" + diag_HighBloodPressureProblems
+				+ ", diag_HighCholesterolProblems=" + diag_HighCholesterolProblems + ", diag_HeartrelatedProblems="
+				+ diag_HeartrelatedProblems + ", diag_AsthamaProblems=" + diag_AsthamaProblems
+				+ ", diag_ThyroidProblems=" + diag_ThyroidProblems + ", diag_HighUricAcidLevelProblems="
+				+ diag_HighUricAcidLevelProblems + ", diag_CancerProblems=" + diag_CancerProblems
+				+ ", diag_LiverProblems=" + diag_LiverProblems + ", diag_KidneyProblems=" + diag_KidneyProblems
+				+ ", diag_OsteoporosisProblems=" + diag_OsteoporosisProblems + ", diag_ArthritisProblems="
+				+ diag_ArthritisProblems + ", diag_OtherProblems=" + diag_OtherProblems + ", diag_Cancer_Type_Bladder="
+				+ diag_Cancer_Type_Bladder + ", diag_Cancer_Type_Blood=" + diag_Cancer_Type_Blood
+				+ ", diag_Cancer_Type_Breast=" + diag_Cancer_Type_Breast + ", diag_Cancer_Type_Colon="
+				+ diag_Cancer_Type_Colon + ", diag_Cancer_Type_Eye=" + diag_Cancer_Type_Eye
+				+ ", diag_Cancer_Type_Ovarian=" + diag_Cancer_Type_Ovarian + ", diag_Cancer_Type_Pancreas="
+				+ diag_Cancer_Type_Pancreas + ", diag_Cancer_Type_Pituitary=" + diag_Cancer_Type_Pituitary
+				+ ", diag_Cancer_Type_Prostrate=" + diag_Cancer_Type_Prostrate + ", diag_Cancer_Type_Skin="
+				+ diag_Cancer_Type_Skin + ", diag_Cancer_Type_Stomach=" + diag_Cancer_Type_Stomach
+				+ ", diag_Cancer_Type_Thyroid=" + diag_Cancer_Type_Thyroid + ", diag_Cancer_Type_Others="
+				+ diag_Cancer_Type_Others + ", FH_Diabetes=" + FH_Diabetes + ", FH_Hypertension=" + FH_Hypertension
 				+ ", FH_ThyroidProblems=" + FH_ThyroidProblems + ", FH_HeartRelatedProblems=" + FH_HeartRelatedProblems
 				+ ", FH_Osteoporosis=" + FH_Osteoporosis + ", FH_Cancer=" + FH_Cancer + ", FH_Cancer_Type_Bladder="
 				+ FH_Cancer_Type_Bladder + ", FH_Cancer_Type_Blood=" + FH_Cancer_Type_Blood + ", FH_Cancer_Type_Breast="
@@ -1577,10 +1549,11 @@ public class HCPersonalizedCheck {
 				+ HC_Gynaecology_MissedPeriods + ", HC_Gynaecology_VaginalDischargeOrIrritation="
 				+ HC_Gynaecology_VaginalDischargeOrIrritation + ", HC_Gynaecology_Spotting=" + HC_Gynaecology_Spotting
 				+ ", HC_Gynaecology_PCODORPCOS=" + HC_Gynaecology_PCODORPCOS + ", HC_Gynaecology_Infertility="
-				+ HC_Gynaecology_Infertility + ", regionId=" + regionId + ", hospitalId=" + hospitalId
-				+ ", packageName=" + packageName + ", packageInclusions=" + packageInclusions
-				+ ", RecommadedInclusions=" + RecommadedInclusions + ", price=" + price + ", tarrif=" + tarrif + "]";
+				+ HC_Gynaecology_Infertility + "]";
 	}
 
 	
+
+
+
 }

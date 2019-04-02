@@ -4,7 +4,6 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,33 +14,44 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.apollo.Service.HCPackagePriceService;
+import com.apollo.ServiceImpl.HCPackagePriceServiceImpl;
 import com.apollo.ServiceImpl.PackageListServiceImpl;
 import com.apollo.model.HCPersonalizedCheck;
+import com.apollo.model.HCPersonalizedCheck2;
 import com.apollo.model.TestParameterDesc;
+import com.google.gson.Gson;
 
 @Path("/personalized")
 public class HCPackagePriceController {
 	private final Logger logger = Logger.getLogger(HCPackagePriceController.class);
 
-	@Path("/personalizedPackage")
+	@Path("/getTest")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String getHello(HCPersonalizedCheck hCPersonalizedCheck) {
 		logger.info("Personalized HealthCheck Controller is called");
 		JSONObject j2 = new JSONObject();
-		String URL = "jdbc:mysql://13.71.124.208:3306/Health_Check";
-		//String URL ="jdbc:mysql://127.0.0.1:3306/Health_Check";
+
+		// String URL = "jdbc:mysql://13.71.124.208:3306/Health_Check";
+		 String URL = "jdbc:mysql://127.0.0.1:3306/Health_Check";
+		//String URL = "jdbc:mysql://localhost:3306/healthcheck1";
 		List list = new ArrayList<>();
 		try {
+			ObjectMapper mapperObj = new ObjectMapper();
+			String jsonStr = mapperObj.writeValueAsString(hCPersonalizedCheck);
+			logger.info("Personalized HealthCheck request " + jsonStr);
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection(URL, "root", "askApolloApp@123");
 			CallableStatement registerQuery = con.prepareCall(
 					"{call hc_get_Personalised_Package(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
-			registerQuery.setString(1, hCPersonalizedCheck.getCityId());
+			// System.out.println(registerQuery);
+			registerQuery.setString(1, hCPersonalizedCheck.getCityId() == null ? "" : hCPersonalizedCheck.getCityId());
 			registerQuery.setString(2, hCPersonalizedCheck.gethRAID());
 			registerQuery.setString(3, hCPersonalizedCheck.getPatientId());
 			registerQuery.setString(4, hCPersonalizedCheck.getuHID());
@@ -195,7 +205,8 @@ public class HCPackagePriceController {
 			registerQuery.setString(151, hCPersonalizedCheck.getHC_Gynaecology_VaginalDischargeOrIrritation());
 			registerQuery.setString(152, hCPersonalizedCheck.getHC_Gynaecology_Spotting());
 			registerQuery.setString(153, hCPersonalizedCheck.getHC_Gynaecology_PCODORPCOS());
-			registerQuery.setString(154, hCPersonalizedCheck.getHC_Gynaecology_Infertility());
+			registerQuery.setString(154, hCPersonalizedCheck.getHC_Gynaecology_Infertility() == null ? ""
+					: hCPersonalizedCheck.getHC_Gynaecology_Infertility());
 			ResultSet rs = registerQuery.executeQuery();
 			JSONObject obj4 = null;
 			JSONArray arr = new JSONArray();
@@ -211,7 +222,9 @@ public class HCPackagePriceController {
 				obj4.put("ToAge", rs.getString(9));
 				obj4.put("Frequency", rs.getString(10));
 				obj4.put("Package_Description", rs.getString(11));
-				obj4.put("Recommended_For", rs.getString(12));
+				obj4.put("Age_Group_Recommended", rs.getString(12));
+				obj4.put("Recommended_For", rs.getString(13));
+				obj4.put("RecommendedTests", rs.getString(14));
 				String[] inclusion = rs.getString(4).split(",");
 				String[] inclusion1 = rs.getString(5).split(",");
 				JSONObject testParam = new JSONObject();
@@ -229,24 +242,45 @@ public class HCPackagePriceController {
 					arr.put(json);
 				}
 
-				testParam.put("PackageinclusionsParametersAndDiscription", arr);
+				obj4.put("packageinclusionsParametersAndDescription", arr);
 				obj4.put("PackageinclusionsParametersAndDiscription", testParam);
-				System.out.println(obj4.toString());
+
 				list.add(obj4);
 				if (list.size() == 0) {
 					j2.put("status", "no records");
 				} else {
 					j2.put("packageDetails", list);
 					j2.put("status", "success");
+
 					logger.info("Personalized HealthCheck Controller  Response is " + j2.toString());
 				}
 			}
 		} catch (Exception e) {
 			j2.put("status", "fail");
-			logger.info("Get All Medmantra Locations Controller: Exception: " + e);
+			// e.printStackTrace();
+			logger.info("Personalized HealthCheck Controller: Exception: " + e);
 
 		}
 		return j2.toString();
+	}
+
+	@Path("/personalizedPackage")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getPersonalizedDetails(HCPersonalizedCheck hCPersonalizedCheck) {
+		logger.info("Personalized HealthCheck Controller is called");
+		HCPackagePriceService hCPackagePriceService = null;
+		String response = "fail";
+		try {
+			hCPackagePriceService = new HCPackagePriceServiceImpl();
+			response = hCPackagePriceService.getPersonalizedDetails(hCPersonalizedCheck);
+			logger.info("Personalized HealthCheck Controller Response is " + response);
+		} catch (Exception e) {
+			response = "{\"status\":\"fail\"}";
+			logger.info("Personalized HealthCheck Controller Exception is " + e);
+		}
+		return response;
 	}
 
 }

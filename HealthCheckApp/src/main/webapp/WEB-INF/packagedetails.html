@@ -134,6 +134,15 @@ href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
 	  -moz-box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
 	  box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
 	}
+	.edit-test-btn
+	{
+	    white-space: nowrap;
+	}
+	
+	#mymodal3 .row
+	{
+	margin-bottom:5px;
+	}
 	
 </style>
  
@@ -147,6 +156,9 @@ var agegroup;
 var frequency;
 var fromAge;
 var toAge;
+var testName;
+var recommenBodyPart;
+var clinicalCondition;
 $(document).ready(function() {
 
 	 //var URL = "http://localhost:8086";
@@ -155,7 +167,7 @@ $(document).ready(function() {
 	
 	 var URL = "https://apptest.askapollo.com";
 	 
-	// var URL = "http://10.40.32.51:8080";
+	//var URL = "http://10.40.32.51:8080";
 	 
 	window.addEventListener( "pageshow", function ( event ) {
 		  var historyTraversal = event.persisted || 
@@ -299,8 +311,10 @@ $(document).ready(function() {
 		             {"data":"packageName", width:150},
 		       		 {"data":"testNamesString", width:250},
 		       		 {"data": "frequency", width:90},
-		    		 {"defaultContent": "<button  class=\"select delete-btn\" data-toggle=\"modal\" data-target=\"#mymodal2\" data-keyboard=\"false\" data-backdrop=\"static\">Delete</button>", width: 30},
-		    		 {"defaultContent": "<button  class=\"select edit-btn\" data-toggle=\"modal\" data-target=\"#mymodal1\" data-keyboard=\"false\" data-backdrop=\"static\">Edit</button>", width: 30},
+		       		{"defaultContent": "<button class=\"select edit-test-btn\" data-toggle=\"modal\" data-target=\"#mymodal3\" data-keyboard=\"false\" data-backdrop=\"static\">Edit Test</button>", width: 30},
+		    		{"defaultContent": "<button  class=\"select delete-btn\" data-toggle=\"modal\" data-target=\"#mymodal2\" data-keyboard=\"false\" data-backdrop=\"static\">Delete</button>", width: 30},
+		    	    {"defaultContent": "<button  class=\"select edit-btn\" data-toggle=\"modal\" data-target=\"#mymodal1\" data-keyboard=\"false\" data-backdrop=\"static\">Edit</button>", width: 30},
+		    	    //{"defaultContent": "<button class=\"select edit-test-btn\" data-toggle=\"modal\" data-target=\"#mymodal3\" data-keyboard=\"false\" data-backdrop=\"static\>Edit Test</button>",width:30}
   					 {"data": "ageGroup", width:70},
 		     		 {"data":"description", width:80},
 					 {"data": "recommendedFor", width:70},
@@ -311,7 +325,9 @@ $(document).ready(function() {
 		   ]
         });
 var table = $('#doctorlist').DataTable();
+//alert(packageId);
 
+ 
 $('#doctorlist tbody').on( 'click', '.edit-btn', function () {
 //if ($(this).index() == 5 ) { // provide index of your column in which you prevent row click here is column of 4 index
        // return;
@@ -324,15 +340,18 @@ $('#doctorlist tbody').on( 'click', '.edit-btn', function () {
 	 packageid = tr.children("td:nth-child(1)").text();
 	// alert(packageid);
 	 packagename=tr.children("td:nth-child(2)").text();
-	 var testName=tr.children("td:nth-child(3)").text();
+	 //var testName=tr.children("td:nth-child(3)").text();
+	 testName=tr.children("td:nth-child(3)").text();
+	 //alert(testName);
 	 frequency=tr.children("td:nth-child(4)").text();
-	 agegroup=tr.children("td:nth-child(7)").text();
-	 description=tr.children("td:nth-child(8)").text();
-	 recommenedfor=tr.children("td:nth-child(9)").text();
-	 genderClick=tr.children("td:nth-child(10)").text();
-	 fromAge=tr.children("td:nth-child(11)").text();
-	 toAge=tr.children("td:nth-child(12)").text();
-	 displayName=tr.children("td:nth-child(13)").text();
+	 
+	 agegroup=tr.children("td:nth-child(8)").text();
+	 description=tr.children("td:nth-child(9)").text();
+	 recommenedfor=tr.children("td:nth-child(10)").text();
+	 genderClick=tr.children("td:nth-child(11)").text();
+	 fromAge=tr.children("td:nth-child(12)").text();
+	 toAge=tr.children("td:nth-child(13)").text();
+	 displayName=tr.children("td:nth-child(14)").text();
 	 
  	$.ajax({
         url: URL + "/HealthCheckApp/apollo/test/list",
@@ -466,6 +485,122 @@ $(document).on("click",'.delete-btn',function (e) {
 		});
 		
 });
+$(document).on("click",'.edit-test-btn',function (e) {
+	  var tr =$(this).parent().parent();
+	
+	  packageid = tr.children("td:nth-child(1)").text();
+	 packagename=tr.children("td:nth-child(2)").text();
+	 testName=tr.children("td:nth-child(3)").text();
+	 frequency=tr.children("td:nth-child(4)").text();
+	 agegroup=tr.children("td:nth-child(8)").text();
+	 description=tr.children("td:nth-child(9)").text();
+	 recommenedfor=tr.children("td:nth-child(10)").text();
+	 genderClick=tr.children("td:nth-child(11)").text();
+	fromAge=tr.children("td:nth-child(13)").text();
+	toAge=tr.children("td:nth-child(12)").text();
+	displayName=tr.children("td:nth-child(14)").text();
+	recommenBodyPart = '';
+	clinicalCondition=''; 
+	testName=tr.children("td:nth-child(3)").text();
+	 
+	
+	 var result = testName.split(",");
+            $("#mymodal3 .modal-body").html(renderData(result));
+//	 console.log(result);
+	});
+$(document).on("click",'#update-test-order',function (e) {
+	let json=[];
+	$("#mymodal3 .modal-body .row").each(function(){
+		let th=$(this);
+		let order=  th.children(".col-md-4").children("input").val();
+		let testName=  th.children(".col-md-6").text();
+		json.push({testName : testName, order :Number(order) });
+	});
+	
+	json.sort(
+			function(a, b){
+				return a.order-b.order;
+			});
+	
+	
+	let testNames = [];
+	$.each(json, function(k,v){
+		testNames.push(v.testName);
+		});
+	
+	
+	  $("#mymodal3 .modal-body").html(renderData(testNames));
+	console.log(testNames.join(","));
+	var testNameEdit = testNames.join(",");
+	//var URL = "http://localhost:8086";
+	var URL = "https://apptest.askapollo.com";
+	console.log(URL);
+		         $.ajax({
+		      type: 'POST',
+		      url : URL +  "/HealthCheckApp/apollo/package/update",
+		      data : JSON.stringify({"packageId":packageid,"packageName":packagename,"description":description,"recommendedFor":recommenedfor,"ageGroup":agegroup,"frequency":frequency,"testNamesString":testNameEdit,"gender":genderClick,"bodyPart":recommenBodyPart,"clinicalCondi":clinicalCondition,"fromAge":fromAge,"toAge":toAge,"displayName":displayName}),
+		      dataType : 'json',
+		      contentType: "application/json; charset=utf-8",
+		      success : function(data) {
+		    	  console.log(data);
+		    	  window.top.location=URL + "/HealthCheckApp/packageDetails"
+		      },
+		      error:function(){
+		    	  window.top.location=URL + "/HealthCheckApp/packageDetails";
+		      }
+		});      
+		
+}); 
+/* $('#update-test-order').click( function (e) {
+	
+	var tr =$(this).parent().parent();
+	
+	 packageid = tr.children("td:nth-child(1)").text();
+	 packagename=tr.children("td:nth-child(2)").text();
+	 testName=tr.children("td:nth-child(3)").text();
+	 frequency=tr.children("td:nth-child(4)").text();
+	 agegroup=tr.children("td:nth-child(8)").text();
+	 description=tr.children("td:nth-child(9)").text();
+	 recommenedfor=tr.children("td:nth-child(10)").text();
+	 genderClick=tr.children("td:nth-child(11)").text();
+	fromAge=tr.children("td:nth-child(12)").text();
+	toAge=tr.children("td:nth-child(13)").text();
+	displayName=tr.children("td:nth-child(14)").text();
+	recommenBodyPart = '';
+	clinicalCondition='';
+	var testNameEdit = testNames.join(",");
+		  $.ajax({
+		      type: 'POST',
+		      url : URL +  "/HealthCheckApp/apollo/package/update",
+		      data : JSON.stringify({"packageId":packageid,"packageName":packagename,"description":description,"recommendedFor":recommenedfor,"ageGroup":agegroup,"frequency":frequency,"testNamesString":testNameEdit,"gender":genderClick,"bodyPart":recommenBodyPart,"clinicalCondi":clinicalCondition,"fromAge":fromAge,"toAge":toAge,"displayName":displayName}),
+		     //data : JSON.stringify({"testNamesString":testNameEdit}),
+		     dataType : 'json',
+		      contentType: "application/json; charset=utf-8",
+		      success : function(data) {
+		    	  console.log(data);
+		    	  window.top.location=URL + "/HealthCheckApp/packageDetails"
+		      },
+		      error:function(){
+		    	  window.top.location=URL + "/HealthCheckApp/packageDetails";
+		      }
+		});	 
+}); */
+
+
+  function renderData(result)
+  {
+	  var template = '<div class="row"><div class="col-md-4"><input type="text" value="{{order}}" /></div><div class="col-md-6">{{testName}}</div></div>';
+      let tmtString="";
+      let i=1;
+      $.each(result,function(k, row){
+      	tmtString+=template.replace("{{order}}", i).replace("{{testName}}", row);
+      	i++;
+      	});
+      
+      return tmtString;
+  }
+
+
 
 </script>
 </head>
@@ -580,6 +715,7 @@ $(document).on("click",'.delete-btn',function (e) {
 						<th>Name of Apollo Package</th>
 						<th>Test Names</th>
 						<th>Frequency</th>
+						<th></th>
 						<th></th>
 						<th></th>
 						<th>Age Group</th>
@@ -739,6 +875,37 @@ $(document).on("click",'.delete-btn',function (e) {
            </div>  
         </div>
       </div>
+      	</div>
+	<div class="modal fade" id="mymodal3" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+                
+                <!-- For form popup -->
+
+            <form class="form-horizontal color" method="post">
+              <div class="modal-header">
+                <button type="button" class="close" id="close" data-dismiss="modal">
+                  &times;
+                </button>
+                <h3 class="modal-title">Edit TestName</h3>
+              </div>
+              <div class="modal-body">
+               
+              </div>
+              <div class="modal-footer">
+                <div class="form-group">    
+                  <div class="col-sm-offset-8 col-sm-3">
+                  <div id="book1">
+                    <button class="btn btn-brand-blue" id="update-test-order" type="button">Update</button>
+                    </div>
+                  </div>
+                </div>
+              </div>              
+            </form>
+          <!-- form popup completed -->
+          </div> 
+        </div>
+    </div>
     
     
 </body>
