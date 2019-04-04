@@ -14,6 +14,6 @@ public interface PackageListDAO {
 	
 	public List getPackages(PackageListV2 packageList);
 	
-	public List getActualNames(PackageListV3 packageListV3);
+	public List getActualNames(PackageListV2 packageListV3);
 
 }

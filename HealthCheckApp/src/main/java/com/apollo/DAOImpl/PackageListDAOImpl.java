@@ -106,7 +106,7 @@ public class PackageListDAOImpl implements PackageListDAO {
 	}
 
 	@Override
-	public List getActualNames(PackageListV3 packageListV3) {
+	public List getActualNames(PackageListV2 packageListV3) {
 		logger.info("Get Packages DAO");
 		List list = null;
 		try {

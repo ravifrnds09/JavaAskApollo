@@ -9,7 +9,7 @@ public interface PackageListService {
 	public String RegisterPackges(PackageList test);
 	public String getTestParameter(TestParameterDesc desc);
 	public String getPackges(PackageListV2 packageList);
-	public String getActualNames(PackageListV3 packageListV3);
+	public String getActualNames(PackageListV2 packageListV3);
 	
 	
 	

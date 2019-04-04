@@ -12,7 +12,6 @@ import com.apollo.Service.PackageListService;
 import com.apollo.ServiceImpl.PackageListServiceImpl;
 import com.apollo.model.PackageList;
 import com.apollo.model.PackageListV2;
-import com.apollo.model.PackageListV3;
 import com.apollo.model.TestParameterDesc;
 
 @Path("/package")
@@ -66,7 +65,7 @@ public class PackageListController {
 	@Path("/listV3")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getTestActualName(PackageListV3 packageList) {
+	public String getTestActualName(PackageListV2 packageList) {
 		String response = "fail";
 		logger.info("Package ListV2   Controller is called");
 		try {

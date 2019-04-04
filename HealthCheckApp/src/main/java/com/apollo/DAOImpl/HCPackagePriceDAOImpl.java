@@ -7,11 +7,12 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONObject;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.json.JSONArray;
-import org.json.JSONObject;
+
 
 import com.apollo.DAO.HCPackagePriceDAO;
 import com.apollo.ServiceImpl.PackageListServiceImpl;
@@ -28,8 +29,8 @@ public class HCPackagePriceDAOImpl implements HCPackagePriceDAO {
 	public String getPersonalizedDetails(HCPersonalizedCheck hCPersonalizedCheck) {
 		logger.info("Personalized HealthCheck DAO is called");
 		JSONObject jsonObj = new JSONObject();
-		;
 		List getResponse = null;
+		String resultJson = "fail";
 
 		try {
 			ObjectMapper mapperObj = new ObjectMapper();
@@ -37,11 +38,6 @@ public class HCPackagePriceDAOImpl implements HCPackagePriceDAO {
 			logger.info("Personalized HealthCheck request json " + jsonStr);
 			sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession();
-			/*
-			 * Query registerQuery = session.createSQLQuery("CALL" +
-			 * " hc_get_Personalised_Package('1', '1', '96F23536-E845-4232-87C2-94F0DE826FF5', 'RHA0.0000000017',  'Srinu','Suryadevara','9703902559', 'srinusuryadevara@gmail.com', 'FeMale', '31','', 'No', 'Good', 'Mild', 'Moderate', 'Tired',  '', 'Yes', 'yes', 'yes', 'yes','yes','yes', 'yes', 'yes', 'yes', 'yes', 'yes', '', '', 'yes', 'yes', '', 'yes', '', '', '', '', '', '', '', '', '', 'yes', '', '', '', '', 'yes', 'yes', 'yes', '', '', '', '', '', '', '', '', '', '', '', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', '', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes')"
-			 * );
-			 */
 			Query registerQuery = session.createSQLQuery("CALL "
 					+ "hc_get_Personalised_Package(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
@@ -207,18 +203,35 @@ public class HCPackagePriceDAOImpl implements HCPackagePriceDAO {
 			for (Object result : getResponse) {
 				Object[] obj = (Object[]) result;
 				obj4 = new JSONObject();
-				obj4.put("ServiceId", String.valueOf(obj[0]));
-				obj4.put("ServiceName", obj[1].toString());
-				obj4.put("CustomerPackageName", obj[2].toString());
-				obj4.put("Tariff", obj[5].toString());
-				obj4.put("Gender", obj[6].toString());
-				obj4.put("FromAge", obj[7].toString());
-				obj4.put("ToAge", obj[8].toString());
-				obj4.put("Frequency", obj[9].toString());
-				obj4.put("Package_Description", obj[10].toString());
-				obj4.put("Age_Group_Recommended", obj[11].toString());
-				obj4.put("Recommended_For", obj[12].toString());
-				obj4.put("RecommendedTestsForEdoc", obj[13].toString());
+				String[] inclusion = obj[3].toString().split(",");
+				String[] inclusion1 = obj[4].toString().split(",");
+				List<String> arrayList = new ArrayList<>();
+				Collections.addAll(arrayList, inclusion);
+				List<String> arrayList1 = new ArrayList<>();
+				Collections.addAll(arrayList1, inclusion1);
+				if (obj[6].toString().equalsIgnoreCase("male") && arrayList.contains("Pap Smear (for Women)")
+						&& arrayList1.contains("Pap Smear (for Women)")) {
+					arrayList.remove("Pap Smear (for Women)");
+					arrayList1.remove("Pap Smear (for Women)");
+				}
+				inclusion = arrayList.toArray(new String[0]);
+				inclusion1 = arrayList1.toArray(new String[0]);
+				String inclusionStr = convertStringArrayToString(inclusion, ",");
+				JSONObject testParam = new JSONObject();
+				JSONObject json = null;
+				for (int i = 0; i < inclusion.length; i++) {
+					TestParameterDesc testParameterDesc = new TestParameterDesc();
+					testParameterDesc.setPackageName(inclusion1[i]);
+					PackageListServiceImpl packageListServiceImpl = new PackageListServiceImpl();
+					String info = packageListServiceImpl.getTestParameter(testParameterDesc);
+					JSONObject json2 = new JSONObject(info);
+					json = new JSONObject();
+					json.put("inclusionName", inclusion[i]);
+					testParam.put(inclusion[i], json2.getJSONArray(inclusion1[i]));
+					json.put("inclusions", json2.getJSONArray(inclusion1[i]));
+					arr.put(json);
+				}
+				obj4.put("PackageinclusionsParametersAndDiscription", testParam);
 				JSONArray jar = new JSONArray();
 				if (obj[13].toString().equals("")) {
 					obj4.put("RecommendedTests", "");
@@ -237,62 +250,46 @@ public class HCPackagePriceDAOImpl implements HCPackagePriceDAO {
 						tarrifObjEdoc.put("recommendedTestName", Rcm[i]);
 						jar.put(tarrifObjEdoc);
 					}
-					obj4.put("RecommendedTestsAndTariffForEdoc", jar);
 					obj4.put("RecommendedTests", RcmObj);
 				}
-				String[] inclusion = obj[3].toString().split(",");
-				String[] inclusion1 = obj[4].toString().split(",");
-				List<String> arrayList = new ArrayList<>();
-				Collections.addAll(arrayList, inclusion);
-				List<String> arrayList1 = new ArrayList<>();
-				Collections.addAll(arrayList1, inclusion1);
-				if (obj[6].toString().equalsIgnoreCase("male") && arrayList.contains("Pap Smear (for Women)")
-						&& arrayList1.contains("Pap Smear (for Women)")) {
-					arrayList.remove("Pap Smear (for Women)");
-					arrayList1.remove("Pap Smear (for Women)");
-				}
-				inclusion = arrayList.toArray(new String[0]);
-				inclusion1 = arrayList1.toArray(new String[0]);
-				String inclusionStr = convertStringArrayToString(inclusion, ",") ;
-				JSONObject testParam = new JSONObject();
-				JSONObject json = null;
-				for (int i = 0; i < inclusion.length; i++) {
-					TestParameterDesc testParameterDesc = new TestParameterDesc();
-					testParameterDesc.setPackageName(inclusion1[i]);
-					PackageListServiceImpl packageListServiceImpl = new PackageListServiceImpl();
-					String info = packageListServiceImpl.getTestParameter(testParameterDesc);
-					JSONObject json2 = new JSONObject(info);
-					json = new JSONObject();
-					json.put("inclusionName", inclusion[i]);
-					testParam.put(inclusion[i], json2.getJSONArray(inclusion1[i]));
-					json.put("inclusions", json2.getJSONArray(inclusion1[i]));
-					arr.put(json);
-				}
-				obj4.put("Packageinclusions", inclusionStr);
 				obj4.put("packageinclusionsParametersAndDescription", arr);
-				obj4.put("PackageinclusionsParametersAndDiscription", testParam);
+				obj4.put("Age_Group_Recommended", obj[11].toString());
+				obj4.put("Tariff", obj[5].toString());
+				obj4.put("Package_Description", obj[10].toString());
+				obj4.put("Gender", obj[6].toString());
+				obj4.put("CustomerPackageName", obj[2].toString());
+				obj4.put("ServiceId", String.valueOf(obj[0]));
+				obj4.put("Recommended_For", obj[12].toString());
+				obj4.put("ServiceName", obj[1].toString());
+				obj4.put("ToAge", obj[8].toString());
+				obj4.put("Packageinclusions", inclusionStr);
+				obj4.put("Frequency", obj[9].toString());
+				obj4.put("RecommendedTestsAndTariffForEdoc", jar);
+				obj4.put("FromAge", obj[7].toString());
+				obj4.put("RecommendedTestsForEdoc", obj[13].toString());
 				responseList.add(obj4);
 			}
-
 			if (responseList.size() == 0) {
 				jsonObj.put("status", "no records");
 			} else {
 				jsonObj.put("packageDetails", responseList);
 				jsonObj.put("status", "success");
 			}
+			resultJson = jsonObj.toString();
 		} catch (Exception e) {
 			logger.info("Personalized HealthCheck DAO Exception is called " + e);
-			jsonObj.put("status", "fail");
+			// jsonObj.put("status", "fail");
+			resultJson = "{\"status\":\"fail\"}";
 			e.printStackTrace();
 		}
 		logger.info("Personalized HealthCheck DAO  response " + jsonObj.toString());
-		return jsonObj.toString();
+		return resultJson;
 	}
+
 	private static String convertStringArrayToString(String[] strArr, String delimiter) {
 		StringBuilder sb = new StringBuilder();
 		for (String str : strArr)
 			sb.append(str).append(delimiter);
 		return sb.substring(0, sb.length() - 1);
 	}
-
 }
