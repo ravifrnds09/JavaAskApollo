@@ -7,6 +7,7 @@ public class TestParameterDesc {
 	private String parameter;
 	@NotNull
 	private String description;
+	private String Gender;
 	public String getPackageName() {
 		return packageName;
 	}
@@ -24,6 +25,13 @@ public class TestParameterDesc {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public String getGender() {
+		return Gender;
+	}
+	public void setGender(String gender) {
+		Gender = gender;
 	}
 	@Override
 	public String toString() {

@@ -36,11 +36,12 @@ public class HCPackagePriceDAOImpl implements HCPackagePriceDAO {
 			ObjectMapper mapperObj = new ObjectMapper();
 			String jsonStr = mapperObj.writeValueAsString(hCPersonalizedCheck);
 			logger.info("Personalized HealthCheck request json " + jsonStr);
+			System.out.println(jsonStr);
 			sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.openSession();
 			Query registerQuery = session.createSQLQuery("CALL "
 					+ "hc_get_Personalised_Package(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-
+			logger.info("Personalized HealthCheck request json " + registerQuery);
 			registerQuery.setString(0, hCPersonalizedCheck.getCityId());
 			registerQuery.setString(1, hCPersonalizedCheck.gethRAID());
 			registerQuery.setString(2, hCPersonalizedCheck.getPatientId());
@@ -203,16 +204,16 @@ public class HCPackagePriceDAOImpl implements HCPackagePriceDAO {
 			for (Object result : getResponse) {
 				Object[] obj = (Object[]) result;
 				obj4 = new JSONObject();
-				String[] inclusion = obj[3].toString().split(",");
-				String[] inclusion1 = obj[4].toString().split(",");
+				String[] inclusion = obj[4].toString().split(",");
+				String[] inclusion1 = obj[5].toString().split(",");
 				List<String> arrayList = new ArrayList<>();
 				Collections.addAll(arrayList, inclusion);
 				List<String> arrayList1 = new ArrayList<>();
 				Collections.addAll(arrayList1, inclusion1);
-				if (obj[6].toString().equalsIgnoreCase("male") && arrayList.contains("Pap Smear (for Women)")
-						&& arrayList1.contains("Pap Smear (for Women)")) {
-					arrayList.remove("Pap Smear (for Women)");
-					arrayList1.remove("Pap Smear (for Women)");
+				if (obj[7].toString().equalsIgnoreCase("male") && arrayList.contains("Pap Smear") 
+						&& arrayList1.contains("Pap Smear")) {
+					arrayList.remove("Pap Smear");
+					arrayList1.remove("Pap Smear");
 				}
 				inclusion = arrayList.toArray(new String[0]);
 				inclusion1 = arrayList1.toArray(new String[0]);
@@ -222,6 +223,7 @@ public class HCPackagePriceDAOImpl implements HCPackagePriceDAO {
 				for (int i = 0; i < inclusion.length; i++) {
 					TestParameterDesc testParameterDesc = new TestParameterDesc();
 					testParameterDesc.setPackageName(inclusion1[i]);
+					testParameterDesc.setGender(obj[7].toString());
 					PackageListServiceImpl packageListServiceImpl = new PackageListServiceImpl();
 					String info = packageListServiceImpl.getTestParameter(testParameterDesc);
 					JSONObject json2 = new JSONObject(info);
@@ -233,11 +235,11 @@ public class HCPackagePriceDAOImpl implements HCPackagePriceDAO {
 				}
 				obj4.put("PackageinclusionsParametersAndDiscription", testParam);
 				JSONArray jar = new JSONArray();
-				if (obj[13].toString().equals("")) {
+				if (obj[14].toString().equals("")) {
 					obj4.put("RecommendedTests", "");
 				} else {
-					String[] Rcm = obj[13].toString().split(",");
-					String[] trf = obj[14].toString().split(",");
+					String[] Rcm = obj[14].toString().split(",");
+					String[] trf = obj[15].toString().split(",");
 					JSONObject tarrifObj = null;
 					JSONObject tarrifObjEdoc = null;
 					JSONObject RcmObj = new JSONObject();
@@ -253,20 +255,21 @@ public class HCPackagePriceDAOImpl implements HCPackagePriceDAO {
 					obj4.put("RecommendedTests", RcmObj);
 				}
 				obj4.put("packageinclusionsParametersAndDescription", arr);
-				obj4.put("Age_Group_Recommended", obj[11].toString());
-				obj4.put("Tariff", obj[5].toString());
-				obj4.put("Package_Description", obj[10].toString());
-				obj4.put("Gender", obj[6].toString());
+				obj4.put("Age_Group_Recommended", obj[12].toString());
+				obj4.put("Tariff", obj[6].toString());
+				obj4.put("Package_Description", obj[11].toString());
+				obj4.put("Gender", obj[7].toString());
 				obj4.put("CustomerPackageName", obj[2].toString());
 				obj4.put("ServiceId", String.valueOf(obj[0]));
-				obj4.put("Recommended_For", obj[12].toString());
+				obj4.put("Recommended_For", obj[13].toString());
 				obj4.put("ServiceName", obj[1].toString());
-				obj4.put("ToAge", obj[8].toString());
+				obj4.put("ToAge", obj[9].toString());
 				obj4.put("Packageinclusions", inclusionStr);
-				obj4.put("Frequency", obj[9].toString());
+				obj4.put("Frequency", obj[10].toString());
 				obj4.put("RecommendedTestsAndTariffForEdoc", jar);
-				obj4.put("FromAge", obj[7].toString());
-				obj4.put("RecommendedTestsForEdoc", obj[13].toString());
+				obj4.put("FromAge", obj[8].toString());
+				obj4.put("RecommendedTestsForEdoc", obj[14].toString());
+				obj4.put("PackageName", obj[3].toString());
 				responseList.add(obj4);
 			}
 			if (responseList.size() == 0) {

@@ -10,6 +10,7 @@ public interface PackageListService {
 	public String getTestParameter(TestParameterDesc desc);
 	public String getPackges(PackageListV2 packageList);
 	public String getActualNames(PackageListV2 packageListV3);
+	public String getTestParameterV2(TestParameterDesc desc);
 	
 	
 	

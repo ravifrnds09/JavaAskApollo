@@ -31,7 +31,7 @@ public class PackageListController {
 	}
 
 	@POST
-	@Path("/listV2")
+	@Path("/listV3")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getPackageDetails(PackageListV2 packageList) {
@@ -39,7 +39,7 @@ public class PackageListController {
 		logger.info("Package ListV2   Controller is called");
 		try {
 			service = new PackageListServiceImpl();
-			response = service.getPackges(packageList);
+			response = service.getActualNames(packageList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -62,7 +62,7 @@ public class PackageListController {
 		return response;
 	}
 	@POST
-	@Path("/listV3")
+	@Path("/listV2")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getTestActualName(PackageListV2 packageList) {

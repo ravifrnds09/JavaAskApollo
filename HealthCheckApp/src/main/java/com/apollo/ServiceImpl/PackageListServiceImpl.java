@@ -214,4 +214,41 @@ public class PackageListServiceImpl implements PackageListService {
 		return resultJson.toString();
 	}
 
+	@Override
+	public String getTestParameterV2(TestParameterDesc desc) {
+		logger.info("Get Parameter Descriptions Service is called "+desc.toString());
+		dao = new PackageListDAOImpl();
+		List<TestParameterDesc> list = null;
+		TestParameterDesc descList = null;
+		JSONObject inputObj = new JSONObject();
+		List testlist = dao.getTestParameter(desc);
+		String descption = desc.getPackageName();
+		List paramList = new ArrayList();
+		list = new ArrayList<>();
+		try {
+			for (Object result : testlist) {
+				Object[] obj = (Object[]) result;
+				descList = new TestParameterDesc();
+				descList.setParameter(obj[0].toString() != null ? obj[0].toString() : "");
+				descList.setDescription(obj[1].toString().equals("NA") ? "" : obj[1].toString());
+				list.add(descList);
+				//if(descList.getParameter().equals("Surgical Examination (Men)") && descList.getGender().equalsIgnoreCase("male"))
+				JSONObject addrObj = new JSONObject();
+				addrObj.put("parameter", descList.getParameter());
+				addrObj.put("describtion", descList.getDescription());
+				paramList.add(addrObj);
+			}
+			if (list.size() == 0) {
+				inputObj.put(descption, paramList);
+			} else {
+				inputObj.put(descption, paramList);
+			}
+		} catch (Exception e) {
+			 logger.info("Package add Service called: Exception: " + e.getStackTrace());
+			e.printStackTrace();
+		}
+		logger.info("Test Parameter Description Service response is  " + inputObj.toString());
+		return inputObj.toString();
+	}
+
 }
