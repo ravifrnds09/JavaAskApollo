@@ -161,17 +161,13 @@ var recommenBodyPart;
 var clinicalCondition;
 $(document).ready(function() {
 
-	// var URL = "http://localhost:8086";
+	
 	 
-	 var URL = "http://125.16.159.85:8080";
-	
-	 //var URL = "https://devapp.askapollo.com";
-	
-	// var URL = "https://apptest.askapollo.com";
+	 //var URL = "http://125.16.159.85:8080";
 	 
-	//var URL = "http://10.40.32.51:8080";
+	// var URL = "https://apptest.askapollo.com"; // Staging
 	
-	//var URL = "http://220.225.218.37:8080"; // Production
+	var URL = "http://HCAPP.askapollo.com"; // Production
 	 
 	window.addEventListener( "pageshow", function ( event ) {
 		  var historyTraversal = event.persisted || 
@@ -535,9 +531,10 @@ $(document).on("click",'#update-test-order',function (e) {
 	
 	  $("#mymodal3 .modal-body").html(renderData(testNames));
 	var testNameEdit = testNames.join(",");
-	//var URL = "http://localhost:8086";
-	//var URL = "https://apptest.askapollo.com";
-	var URL = "http://220.225.218.37:8080"; // Production
+	
+	//var URL = "https://apptest.askapollo.com";	
+	//var URL = "http://125.16.159.85:8080";
+	var URL = "http://HCAPP.askapollo.com";
 	console.log(URL);
 		         $.ajax({
 		      type: 'POST',
