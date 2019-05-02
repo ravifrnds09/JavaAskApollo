@@ -10,7 +10,7 @@ public class HCTest {
 	
 	private String paramNamesString;
 	
-	private String displayName;
+	private String testDisplayName;
 	
 	public int getTestId() {
 		return testId;
@@ -44,19 +44,23 @@ public class HCTest {
 		this.paramNamesString = paramNamesString;
 	}
 	
-	public String getDisplayName() {
-		return displayName;
+	
+
+	public String getTestDisplayName() {
+		return testDisplayName;
 	}
 
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
+	public void setTestDisplayName(String testDisplayName) {
+		this.testDisplayName = testDisplayName;
 	}
 
 	@Override
 	public String toString() {
 		return "HCTest [testId=" + testId + ", testName=" + testName + ", testDesc=" + testDesc + ", paramNamesString="
-				+ paramNamesString + ", displayName=" + displayName + "]";
+				+ paramNamesString + ", testDisplayName=" + testDisplayName + "]";
 	}
+
+	
 
 	
 	

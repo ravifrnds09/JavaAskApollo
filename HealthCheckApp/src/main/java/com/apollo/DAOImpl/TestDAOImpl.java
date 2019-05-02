@@ -64,7 +64,7 @@ public class TestDAOImpl implements TestDAO {
 			testAddQrery.setString(0, test.getTestName());
 			testAddQrery.setString(1, test.getParamNamesString().equals("")  ? null : test.getParamNamesString());
 			testAddQrery.setString(2, test.getTestDesc());
-			testAddQrery.setString(3, test.getDisplayName());
+			testAddQrery.setString(3, test.getTestDisplayName());
 			response = (String) testAddQrery.uniqueResult();
 			logger.info("Test add DAO called: Response : " + response);		
 			tx.commit();
@@ -101,7 +101,7 @@ public class TestDAOImpl implements TestDAO {
 			testUpdateQrery.setString(1, test.getTestName());
 			testUpdateQrery.setString(2, test.getTestDesc());
 			testUpdateQrery.setString(3, test.getParamNamesString());
-			testUpdateQrery.setString(4, test.getDisplayName());
+			testUpdateQrery.setString(4, test.getTestDisplayName());
 			response = (String) testUpdateQrery.uniqueResult();
 			logger.info("Test update DAO called: : " + response);
 			tx.commit();

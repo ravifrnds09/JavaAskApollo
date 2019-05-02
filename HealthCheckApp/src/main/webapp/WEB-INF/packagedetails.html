@@ -167,7 +167,9 @@ $(document).ready(function() {
 	 
 	// var URL = "https://apptest.askapollo.com"; // Staging
 	
-	var URL = "http://HCAPP.askapollo.com"; // Production
+	//var URL = "http://HCAPP.askapollo.com"; // Production
+	
+	var URL ="http://localhost:8086";
 	 
 	window.addEventListener( "pageshow", function ( event ) {
 		  var historyTraversal = event.persisted || 
@@ -483,9 +485,71 @@ $(document).on("click",'.delete-btn',function (e) {
 			  }
 		    });
 		});
+		 $(document).on("click",'.edit-test-btn',function (e) {
+			  var tr =$(this).parent().parent();
+			
+			  packageid = tr.children("td:nth-child(1)").text();
+			 packagename=tr.children("td:nth-child(2)").text();
+			 testName=tr.children("td:nth-child(3)").text();
+			 frequency=tr.children("td:nth-child(4)").text();
+			 agegroup=tr.children("td:nth-child(8)").text();
+			 description=tr.children("td:nth-child(9)").text();
+			 recommenedfor=tr.children("td:nth-child(10)").text();
+			 genderClick=tr.children("td:nth-child(11)").text();
+			 fromAge=tr.children("td:nth-child(12)").text();
+			 toAge=tr.children("td:nth-child(13)").text();
+			displayName=tr.children("td:nth-child(14)").text();
+			recommenBodyPart = '';
+			clinicalCondition=''; 
+			testName=tr.children("td:nth-child(3)").text();
+			 
+			
+			 var result = testName.split(",");
+		            $("#mymodal3 .modal-body").html(renderData(result));
+//			 console.log(result);
+			});
+		$(document).on("click",'#update-test-order',function (e) {
+			let json=[];
+			$("#mymodal3 .modal-body .row").each(function(){
+				let th=$(this);
+				let order=  th.children(".col-md-4").children("input").val();
+				let testName=  th.children(".col-md-6").text();
+				json.push({testName : testName, order :Number(order) });
+			});
+			
+			json.sort(
+					function(a, b){
+						return a.order-b.order;
+					});
+			
+			
+			let testNames = [];
+			$.each(json, function(k,v){
+				testNames.push(v.testName);
+				});
+			
+			
+			  $("#mymodal3 .modal-body").html(renderData(testNames));
+			var testNameEdit = testNames.join(",");
+				         $.ajax({
+				      type: 'POST',
+				      url : URL +  "/HealthCheckApp/apollo/package/update",
+				      data : JSON.stringify({"packageId":packageid,"packageName":packagename,"description":description,"recommendedFor":recommenedfor,"ageGroup":agegroup,"frequency":frequency,"testNamesString":testNameEdit,"gender":genderClick,"bodyPart":recommenBodyPart,"clinicalCondi":clinicalCondition,"fromAge":fromAge,"toAge":toAge,"displayName":displayName}),
+				      dataType : 'json',
+				      contentType: "application/json; charset=utf-8",
+				      success : function(data) {
+				    	  console.log(data);
+				    	  window.top.location=URL + "/HealthCheckApp/packageDetails"
+				      },
+				      error:function(){
+				    	  window.top.location=URL + "/HealthCheckApp/packageDetails";
+				      }
+				});      
+				
+		});
 		
 });
-$(document).on("click",'.edit-test-btn',function (e) {
+/* $(document).on("click",'.edit-test-btn',function (e) {
 	  var tr =$(this).parent().parent();
 	
 	  packageid = tr.children("td:nth-child(1)").text();
@@ -534,7 +598,8 @@ $(document).on("click",'#update-test-order',function (e) {
 	
 	//var URL = "https://apptest.askapollo.com";	
 	//var URL = "http://125.16.159.85:8080";
-	var URL = "http://HCAPP.askapollo.com";
+	//var URL = "http://HCAPP.askapollo.com";
+	var URL ="http://localhost:8086";
 	console.log(URL);
 		         $.ajax({
 		      type: 'POST',
@@ -551,42 +616,7 @@ $(document).on("click",'#update-test-order',function (e) {
 		      }
 		});      
 		
-}); 
-/* $('#update-test-order').click( function (e) {
-	
-	var tr =$(this).parent().parent();
-	
-	 packageid = tr.children("td:nth-child(1)").text();
-	 packagename=tr.children("td:nth-child(2)").text();
-	 testName=tr.children("td:nth-child(3)").text();
-	 frequency=tr.children("td:nth-child(4)").text();
-	 agegroup=tr.children("td:nth-child(8)").text();
-	 description=tr.children("td:nth-child(9)").text();
-	 recommenedfor=tr.children("td:nth-child(10)").text();
-	 genderClick=tr.children("td:nth-child(11)").text();
-	fromAge=tr.children("td:nth-child(12)").text();
-	toAge=tr.children("td:nth-child(13)").text();
-	displayName=tr.children("td:nth-child(14)").text();
-	recommenBodyPart = '';
-	clinicalCondition='';
-	var testNameEdit = testNames.join(",");
-		  $.ajax({
-		      type: 'POST',
-		      url : URL +  "/HealthCheckApp/apollo/package/update",
-		      data : JSON.stringify({"packageId":packageid,"packageName":packagename,"description":description,"recommendedFor":recommenedfor,"ageGroup":agegroup,"frequency":frequency,"testNamesString":testNameEdit,"gender":genderClick,"bodyPart":recommenBodyPart,"clinicalCondi":clinicalCondition,"fromAge":fromAge,"toAge":toAge,"displayName":displayName}),
-		     //data : JSON.stringify({"testNamesString":testNameEdit}),
-		     dataType : 'json',
-		      contentType: "application/json; charset=utf-8",
-		      success : function(data) {
-		    	  console.log(data);
-		    	  window.top.location=URL + "/HealthCheckApp/packageDetails"
-		      },
-		      error:function(){
-		    	  window.top.location=URL + "/HealthCheckApp/packageDetails";
-		      }
-		});	 
-}); */
-
+});  */
 
   function renderData(result)
   {

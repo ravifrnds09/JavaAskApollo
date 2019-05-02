@@ -13,19 +13,18 @@
 			name="hibernate.connection.password">askApolloApp@123</property> -->
 		<!-- Medmantra DB -->
 
-		<property name="hibernate.connection.url">jdbc:mysql://10.40.32.51:3306/Health_Check3?autoReconnect=true&amp;useSSL=false</property>
-		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">askHealthCheck@123</property>
-
-		<!-- <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/Health_Check?autoReconnect=true&amp;useSSL=false</property> 
+		<!-- <property name="hibernate.connection.url">jdbc:mysql://10.40.32.51:3306/Health_Check3?autoReconnect=true&amp;useSSL=false</property> 
 			<property name="hibernate.connection.username">root</property> <property 
 			name="hibernate.connection.password">askHealthCheck@123</property> -->
+
+		<!-- <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/healthcheck1?autoReconnect=true&amp;useSSL=false</property> 
+			<property name="hibernate.connection.username">root</property> <property 
+			name="hibernate.connection.password">root@123</property> -->
 		<!-- For Azure DB Staging -->
 
-		<!-- <property name="hibernate.connection.url">jdbc:mysql://13.71.124.208:3306/Health_Check?autoReconnect=true</property> 
-			<property name="hibernate.connection.username">root</property> <property 
-			name="hibernate.connection.password">askApolloApp@123</property> -->
-			
+		<property name="hibernate.connection.url">jdbc:mysql://13.71.124.208:3306/Health_Check?autoReconnect=true</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">askApolloApp@123</property>
 
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="javax.persistence.validation.mode">none</property>

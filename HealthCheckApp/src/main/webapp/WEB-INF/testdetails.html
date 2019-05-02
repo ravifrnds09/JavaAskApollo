@@ -206,11 +206,13 @@ href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
 			<div class='container'>
 					Test Description:&nbsp&nbsp
 					<textarea id="testDescription" name="desc" rows="3" cols="45"></textarea>
-				
+					&nbsp&nbsp&nbsp&nbsp&nbsp&nbspTest DisplayName:&nbsp&nbsp
+					<input type="text" id="displayName" autocomplete="off"> 
 						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 						<input class="button" type="button" id="add" value=" Add ">
 		 	</div>
+		 	
 		</div>
 		
 		<br>
@@ -225,6 +227,7 @@ href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
 						     <th>Test Name</th>
 						     <th>Test Parameters</th>
 						     <th>Test Description</th>
+						     <th>Test DisplayName</th>
 						     <th></th>
 						     <th></th>	
 						    </tr>
@@ -284,6 +287,11 @@ href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
 						</td>
                     </tr>
                     
+                    <tr class="table-style">
+                      <td>Test DisplayName:</td>
+                      <td><textarea name="description" id="DisplayName" rows="3" cols="45"></textarea></td>
+                    </tr>
+                    
                   </tbody>
                 </table>
               </div>
@@ -330,7 +338,8 @@ href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
 	
 		//var URL = "https://apptest.askapollo.com"; // Staging
 		//var URL = "http://125.16.159.85:8080";
-		var URL = "http://HCAPP.askapollo.com";
+	//	var URL = "http://HCAPP.askapollo.com";
+		var URL ="http://localhost:8086";
 		window.addEventListener( "pageshow", function ( event ) {
 			  var historyTraversal = event.persisted || 
 			                         ( typeof window.performance != "undefined" && 
@@ -366,7 +375,8 @@ href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
 		                'testID': json[i].testId,
 		                'name'  : json[i].testName,
 		                'description' : json[i].testDesc,
-		                'testParametersString' : json[i].paramNamesString
+		                'testParametersString' : json[i].paramNamesString,
+		                'testDisplayName':json[i].testDisplayName
 		              })
 		            }
 		            return return_data;
@@ -376,6 +386,7 @@ href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
 	                    {"data":"name", width:250},
 	                    {"data":"testParametersString", width:600},
 	                    {"data":"description"},
+	                    {"data":"testDisplayName"},
 	                    {"defaultContent": "<button  class=\"select\" data-toggle=\"modal\" data-target=\"#mymodal2\" data-keyboard=\"false\" data-backdrop=\"static\">Delete</button>", width:100},
                         {"defaultContent": "<button  class=\"select\" data-toggle=\"modal\" data-target=\"#mymodal1\" data-keyboard=\"false\" data-backdrop=\"static\">Edit</button>", width:100}
                         ]
@@ -428,6 +439,7 @@ href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
         $('#testli').show();
 		var name = $.trim(document.getElementById("name").value);
 		var testDescription = $.trim(document.getElementById("testDescription").value);
+		var testDisplayName = $.trim(document.getElementById("displayName").value);
 		var selectParamString = "";
 		if( $('#list_tag :selected').length> 0){
 		    $('#list_tag :selected').each(function(i, selected) {
@@ -447,7 +459,7 @@ href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
 	    	$.ajax({
 			      type: 'POST',
 			      url : URL +  "/HealthCheckApp/apollo/test/add",
-			      data : JSON.stringify({"testName":name,"testDesc":testDescription,"paramNamesString":selectParamString}),
+			      data : JSON.stringify({"testName":name,"testDesc":testDescription,"paramNamesString":selectParamString,"testDisplayName":testDisplayName}),
 			      dataType : 'json',
 			      contentType: "application/json; charset=utf-8",
 			      success : function(data) {
@@ -521,11 +533,11 @@ href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
 	  testparametername=$('td', this).eq(1).text();
 	  description=$('td', this).eq(2).text();
 	  testupdateDescription=$('td', this).eq(3).text();
-	  
+	  testDisplayName = $('td', this).eq(4).text();
 	  //document.getElementById('testID').value=testParameterid;
 	  document.getElementById('testNAME').value=testparametername;
 	  document.getElementById('descripTION').value=testupdateDescription;
-	  
+	  document.getElementById('DisplayName').value=testDisplayName;
 	   
 	});
 	
@@ -533,6 +545,7 @@ href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
 	 
 	 var updatePackagename1 = $.trim($("#testNAME").val());
 	 var updatePackageDescription = $("#descripTION").val();
+	 var updateTestDisplayName = $("#DisplayName").val();
 	 var selectParamString = "";
 		if( $('#list_tag_update :selected').length> 0){
 		    $('#list_tag_update :selected').each(function(i, selected) {
@@ -552,7 +565,7 @@ href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
 		    $.ajax({
 		      type: 'POST',
 		      url : URL + "/HealthCheckApp/apollo/test/update",
-		      data: JSON.stringify({"testId":testParameterid,"testName":updatePackagename1,"testDesc":updatePackageDescription,"paramNamesString":selectParamString}),
+		      data: JSON.stringify({"testId":testParameterid,"testName":updatePackagename1,"testDesc":updatePackageDescription,"paramNamesString":selectParamString,"testDisplayName":updateTestDisplayName}),
 		      dataType : 'json',
 		      contentType: "application/json; charset=utf-8",
 		      success : function(data) {

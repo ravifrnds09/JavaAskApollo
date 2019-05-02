@@ -34,7 +34,8 @@ public class TestParameterServiceImpl implements TestParameterService {
 			for (Object[] object : testParameterListResponse) {
 				
 				hcTestParameter = new HCTestParameter();
-				hcTestParameter.setParamId((int) object[0]);
+				int id = Integer.parseInt(object[0].toString());
+				hcTestParameter.setParamId(id);
 				hcTestParameter.setParamName(object[1] == null ? "" : (String) object[1]);
 				hcTestParameter.setParamDesc(object[2] == null ? "" : (String) object[2]);
 				hcTestParameter.setAlterName(object[3] == null ? "" : (String) object[3]);
